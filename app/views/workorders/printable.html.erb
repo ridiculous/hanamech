@@ -1,0 +1,124 @@
+<div style="border: 2pt solid black; width: 90%; padding: 20pt;background-color: #E6E6FA;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="4" align="center">
+        <span style="font-size: 29pt; color: navy;">Workorder Summary</span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" align="left" style="font-size: 15pt;"><%= @workorder.car.customer.first_name+' '+@workorder.car.customer.last_name %></td>
+    </tr>
+    <tr>
+      <td colspan="4" align="left" style="font-size: 15pt;"><%= @workorder.date %></td>
+    </tr>
+    <tr>
+      <th style="width:25%"></th>
+      <th style="width:25%"></th>
+      <th style="width:35%"></th>
+      <th style="width:15%"></th>
+    </tr>
+    <tr style="background-color:#F0F8FF;">
+      <td valign="top">
+        <div>
+          <table cellspacing="0" cellpadding="4" width="100%" class="chah">
+            <tr>
+              <th colspan="2" style="border-bottom: #003163 1pt solid; border-left: #003163 1pt solid; border-top: #003163 1pt solid;">
+                <p style="font-size: 18pt; color: navy; text-align: center">Vehicle Info</p>
+              </th>
+            </tr>
+            <tr>
+              <th align="left"  style="border-bottom: #003163 1pt solid; border-left: #003163 1pt solid; border-right: #003163 1pt solid;">Vehicle</th>
+              <td style="border-bottom: #003163 1pt solid;  border-right: 1pt solid #003163;">
+                <% unless  @workorder.car_id.nil? ||  @workorder.car_id == 0 %>
+                  <%= @workorder.car.car_make+' '+@workorder.car.car_model%>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th align="left"  style="border-bottom: #003163 1pt solid; border-left: #003163 1pt solid; border-right: #003163 1pt solid;">Year</th>
+              <td style="border-bottom: #003163 1pt solid; border-right: #003163 1pt solid;"><%= @workorder.car.year %> </td>
+            </tr>
+            <tr>
+              <th align="left"  style="border-bottom: #003163 1pt solid; border-left: #003163 1pt solid; border-right: #003163 1pt solid;">VIN Number</th>
+              <td style="border-bottom: #003163 1pt solid; border-right: #003163 1pt solid;"><%= @workorder.car.vin_number %> </td>
+            </tr>
+            <tr>
+              <th align="left"  style="border-bottom: #003163 1pt solid; border-left: #003163 1pt solid; border-right: #003163 1pt solid;">Engine Size</th>
+              <td style="border-bottom: #003163 1pt solid; border-right: #003163 1pt solid;"><%= @workorder.car.engine_size %> </td>
+            </tr>
+            <tr>
+              <th align="left"  style="border-bottom: #003163 1pt solid; border-left: #003163 1pt solid; border-right: #003163 1pt solid;">Odometer</th>
+              <td style="border-bottom: #003163 1pt solid; border-right: #003163 1pt solid;"><%= @workorder.odometer %> </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+      <td valign="top">
+        <% mats = split_by_comma(@workorder.materials) %>
+        <table cellspacing="0" cellpadding="4" width="100%">
+          <tr>
+            <th style="border-bottom: 1pt solid #003163; border-top: 1pt solid #003163">
+              <p style="font-size: 18pt; color: navy; text-align: center">Materials</p>
+            </th>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <div style="border: #003163 1pt solid;">
+                <ul class="chah">
+                  <% mats.each do |m| %>
+                    <li>
+                      <%= m %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td valign="top">
+        <div>
+          <table cellspacing="0" cellpadding="4" width="100%">
+            <tr>
+              <th style="border-bottom: #003163 1pt solid; border-top: #003163 1pt solid;">
+                <p style="font-size: 18pt; color: navy; text-align: center">Instructions</p>
+              </th>
+            </tr>
+            <td>
+              <div class="chah" style="border: #003163 1pt solid; padding: 5pt">
+                <%= @workorder.details %>
+              </div>
+            </td>
+          </table>
+        </div>
+      </td>
+      <td valign="top">
+        <div>
+          <table cellspacing="0" cellpadding="4" width="100%" class="chah">
+            <tr>
+              <th colspan="2" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163; border-top: 1pt solid #003163;">
+                <p style="font-size: 18pt; color: navy; text-align: center">Costs</p>
+              </th>
+            </tr>
+            <tr>
+              <th align="left" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163; border-left: 1pt solid #003163">Parts</th>
+              <td align="left" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163;"><%= "$"+@workorder.parts unless @workorder.parts.empty? %></td>
+            </tr>
+            <th align="left" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163; border-left: 1pt solid #003163">Labor</th>
+            <td align="left" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163;"><%= "$"+@workorder.labor unless @workorder.labor.empty? %></td>
+            <tr>
+              <th align="left" style="width:30%; border-bottom: 1pt solid #003163; border-right: 1pt solid #003163; border-left: 1pt solid #003163">Tax</th>
+              <td align="left" style="width:70%; border-bottom: 1pt solid #003163; border-right: 1pt solid #003163;"><%= "$"+@workorder.tax unless @workorder.tax.empty? %></td>
+            </tr>
+            <tr>
+              <th align="left" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163; border-left: 1pt solid #003163">Total</th>
+              <td align="left" style="border-bottom: 1pt solid #003163; border-right: 1pt solid #003163;"><%= "$"+@workorder.total unless @workorder.total.empty? %></td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<br/>
+<a href="javascript:window.print();">Print</a>

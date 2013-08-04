@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  details: MyString
+  materials: MyString
+  date: 2010-12-11
+  odometer: MyString
+  parts: MyString
+  labor: MyString
+  tax: MyString
+  total: MyString
+  car_id: 1
+
+two:
+  details: MyString
+  materials: MyString
+  date: 2010-12-11
+  odometer: MyString
+  parts: MyString
+  labor: MyString
+  tax: MyString
+  total: MyString
+  car_id: 1

@@ -1,0 +1,8 @@
+<h3>Welcome. Please authorize</h3>
+<div>
+  <%= form_tag(process_login_path, method: :post) do %>
+      <%= email_field_tag(:email) %>
+      <%= password_field_tag(:password) %>
+      <%= submit_tag('Log in') %>
+  <% end %>
+</div>

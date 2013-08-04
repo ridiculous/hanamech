@@ -1,0 +1,34 @@
+<div class="head-under fl">Work Orders</div> <%= link_to 'New Workorder', my_new_wo_path, class: 'fl ml10' %>
+<div class="reset"></div>
+<% if @workorders.any? %>
+    <%= render_paging %>
+    <table cellpadding="5" cellspacing="0" class="nice">
+      <tr>
+        <th style="width: 10%">Date</th>
+        <th>Details</th>
+        <th>Materials</th>
+        <th>Odometer</th>
+        <th>Cost</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <% @workorders.each do |workorder| %>
+          <tr>
+            <td><%= workorder.date %></td>
+            <td><%= workorder.details %></td>
+            <td><%= workorder.materials %></td>
+            <td><%= workorder.odometer %></td>
+            <td><%= "$"+workorder.total unless workorder.total.empty? %></td>
+            <td><%= link_to 'View', my_wo_path(workorder) %></td>
+            <td><%= link_to 'Edit', edit_workorder_path(workorder) %></td>
+            <td><%= link_to 'Delete', my_wo_path(workorder), data: {confirm: 'Are you sure you want to delete this Work order?' }, method: :delete, class: 'delete' %></td>
+          </tr>
+      <% end %>
+    </table>
+    <hr/>
+    <p style="text-align: center; color: #66B7E7; font-size: 18px">>>><a href="#top">Top</a><<<</p>
+<% else %>
+    <br/>
+    <p><span class="noneyet">This car has no work orders </span></p>
+<% end %>
