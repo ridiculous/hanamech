@@ -45,7 +45,7 @@ class CarsController < ApplicationController
 
   def destroy
     @car.destroy
-    redirect_to(my_cars_path)
+    redirect_to(my_cars_path, notice: 'Car has been deleted')
   end
 
   private

@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update_attributes(params.require(:customer).permit!)
-      redirect_to(edit_customer_path(@customer), :notice => 'Record updated')
+      redirect_to(customer_path(@customer), :notice => 'Record updated')
     else
       render "edit"
     end
@@ -42,7 +42,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-    redirect_to(customers_url)
+    redirect_to(customers_path, notice: "#{@customer} has been deleted")
   end
 
   private

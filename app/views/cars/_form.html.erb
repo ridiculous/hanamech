@@ -45,5 +45,6 @@
   <%#*</div>%>
   <div class="actions">
     <%= f.submit %>
+    <%= link_to 'Cancel', (@car.id.nil? ? my_cars_path : my_car_path(@car)) %>
   </div>
 <% end %>

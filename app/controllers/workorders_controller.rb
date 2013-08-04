@@ -44,7 +44,7 @@ class WorkordersController < ApplicationController
 
   def destroy
     @workorder.destroy
-    redirect_to(car_workorders_path(@car))
+    redirect_to(car_workorders_path(@car), notice: 'Workorder has been deleted')
   end
 
   def printable
