@@ -10,6 +10,10 @@ class Customer < ActiveRecord::Base
     "#{last_name}, #{first_name}"
   end
 
+  def to_s
+    first_name
+  end
+
   class << self
 
     def searchable_fields
