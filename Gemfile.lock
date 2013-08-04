@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/ridiculous/box-cutter
-  revision: e487a06f16a74bea299518fa19722ca235b6697c
-  specs:
-    box-cutter (0.0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -139,7 +133,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   better_errors
   binding_of_caller
-  box-cutter!
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
