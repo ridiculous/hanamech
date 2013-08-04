@@ -8,4 +8,5 @@
 
 jUtils.addEvent(window, 'load', function () {
     bindDeleteLinks();
+    bindWorkOrderHelper();
 });

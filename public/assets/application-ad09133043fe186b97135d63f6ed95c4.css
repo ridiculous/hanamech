@@ -14,6 +14,10 @@ body, p, ol, ul, td {
     text-align: left;
 }
 
+input[type=submit] {
+    font-size: 18px;
+}
+
 pre {
     background-color: #eee;
     padding: 10px;
@@ -266,6 +270,7 @@ div #out .luna-actions a.luna-actions a:visited {
 
 .customer-menu .luna-actions a {
     color: #005AB3;
+    margin-left: 0;
 }
 
 a img {
