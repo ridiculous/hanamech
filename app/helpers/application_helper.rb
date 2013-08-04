@@ -38,7 +38,7 @@ module ApplicationHelper
       concat link_to('Customers', customers_path, class: "#{'active' if controller_name == 'customers' || in_customer_mode}")
       unless in_customer_mode
         concat link_to('Cars', cars_path, class: "#{'active' if controller_name == 'cars'}")
-        concat link_to('Workorders', workorders_path, class: "#{'active' if controller_name == 'workorders'}")
+        concat link_to('Work Orders', workorders_path, class: "#{'active' if controller_name == 'workorders'}")
       end
       concat link_to('Log out', logout_path, style: 'margin-right: 0;')
     end

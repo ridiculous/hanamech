@@ -22,7 +22,7 @@
             <td><%= car.vin_number %></td>
             <td><%= car.customer.try(:full_name) %></td>
             <td><%= link_to 'Edit', edit_customer_car_path(car.customer, car) %></td>
-            <td><%= link_to 'Workorders', car_workorders_path(car) %> <%= "(#{car.workorders.count})" %></td>
+            <td><%= link_to 'Work Orders', car_workorders_path(car) %> <%= "(#{car.workorders.count})" %></td>
             <td><%= link_to 'Delete', my_car_path(car), data: {confirm: "Are you sure you want to delete this #{car.car_make}? All work orders for this car will also be deleted!"}, method: :delete, class: 'delete' %></td>
           </tr>
       <% end %>

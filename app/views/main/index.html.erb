@@ -35,11 +35,10 @@
             <td><%= customer.email %></td>
             <td><%= customer.cell_number %></td>
             <td>
-              <% customer_cars = customer.cars %>
-              <% if customer_cars.empty? %>
-                  <%= link_to 'None', "/cars/index/#{customer.id}" %>
+              <% if customer.cars.empty? %>
+                  None. <%= link_to 'New car?', new_customer_car_path(customer) %>
               <% else %>
-                  <%= customer_cars.map { |car| link_to(car.car_make.strip, car_path(car)) }.join(' | ').html_safe %>
+                  <%= customer.cars.map { |car| link_to(car.car_make.strip, car_path(car)) }.join(' | ').html_safe %>
               <% end %>
             </td>
           </tr>

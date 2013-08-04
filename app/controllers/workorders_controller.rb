@@ -28,7 +28,7 @@ class WorkordersController < ApplicationController
   def create
     @workorder.attributes = params.require(:workorder).permit!
     if @workorder.save
-      redirect_to(car_workorder_path(@workorder.car, @workorder), notice: 'Workorder was successfully created')
+      redirect_to(car_workorder_path(@workorder.car, @workorder), notice: 'Work Orders was successfully created')
     else
       render(:new)
     end
@@ -36,7 +36,7 @@ class WorkordersController < ApplicationController
 
   def update
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(car_workorder_path(@workorder.car, @workorder), :notice => 'Workorder was successfully updated')
+      redirect_to(car_workorder_path(@workorder.car, @workorder), :notice => 'Work Order was successfully updated')
     else
       render "edit"
     end
@@ -44,7 +44,7 @@ class WorkordersController < ApplicationController
 
   def destroy
     @workorder.destroy
-    redirect_to(car_workorders_path(@car), notice: 'Workorder has been deleted')
+    redirect_to(car_workorders_path(@car), notice: 'Work Orders has been deleted')
   end
 
   def printable

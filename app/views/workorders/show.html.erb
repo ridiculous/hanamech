@@ -1,12 +1,12 @@
 <div class="mb10">
-  <%= link_to 'Workorders', car_workorders_path(@car) %>
+  <%= link_to 'Work Orders', car_workorders_path(@car) %>
   <%= link_to 'Edit', edit_workorder_path(@workorder) %>
 </div>
 <div style="border: 2px solid black; padding: 20px;background-color: #E6E6FA;" class="alert">
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td colspan="4" align="center">
-        <span style="font-size: 29px; color: navy;">Workorder Summary</span>
+        <span style="font-size: 29px; color: navy;">Work Order Summary</span>
       </td>
     </tr>
     <tr>
@@ -31,34 +31,38 @@
               </th>
             </tr>
             <tr>
-              <th align="left"  style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Vehicle</th>
+              <th align="left" style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Vehicle</th>
               <td style="border-bottom: #003163 1px solid;  border-right: 1px solid #003163;">
-                <% unless  @workorder.car_id.nil? ||  @workorder.car_id == 0 %>
-                  <%= @workorder.car.car_make+' '+@workorder.car.car_model%>
+                <% unless  @workorder.car_id.nil? || @workorder.car_id == 0 %>
+                    <%= @workorder.car.car_make+' '+@workorder.car.car_model %>
                 <% end %>
               </td>
             </tr>
             <tr>
-              <th align="left"  style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Year</th>
+              <th align="left" style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Year</th>
               <td style="border-bottom: #003163 1px solid; border-right: #003163 1px solid;"><%= @workorder.car.year %> </td>
             </tr>
             <tr>
-              <th align="left"  style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">VIN Number</th>
+              <th align="left" style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">VIN
+                Number
+              </th>
               <td style="border-bottom: #003163 1px solid; border-right: #003163 1px solid;"><%= @workorder.car.vin_number %> </td>
             </tr>
             <tr>
-              <th align="left"  style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Engine Size</th>
+              <th align="left" style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Engine
+                Size
+              </th>
               <td style="border-bottom: #003163 1px solid; border-right: #003163 1px solid;"><%= @workorder.car.engine_size %> </td>
             </tr>
             <tr>
-              <th align="left"  style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Odometer</th>
+              <th align="left" style="border-bottom: #003163 1px solid; border-left: #003163 1px solid; border-right: #003163 1px solid;">Odometer</th>
               <td style="border-bottom: #003163 1px solid; border-right: #003163 1px solid;"><%= @workorder.odometer %> </td>
             </tr>
           </table>
         </div>
       </td>
       <td valign="top">
-       
+
         <table cellspacing="0" cellpadding="4" width="100%">
           <tr>
             <th style="border-bottom: 1px solid #003163; border-top: 1px solid #003163">
@@ -69,7 +73,7 @@
             <td style="text-align: center">
               <div style="border: #003163 1px solid;">
                 <ul class="chah">
-                 <%= raw  materials_list(@workorder.materials) %>
+                  <%= raw materials_list(@workorder.materials) %>
                 </ul>
               </div>
             </td>
