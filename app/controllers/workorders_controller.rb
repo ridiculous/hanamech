@@ -44,7 +44,7 @@ class WorkordersController < ApplicationController
 
   def destroy
     @workorder.destroy
-    redirect_to(@car.reload.workorders.any? ? car_workorders_path(@car) : workorders_path)
+    redirect_to(car_workorders_path(@car))
   end
 
   def printable
