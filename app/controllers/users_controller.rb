@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     @customer = @user.customer
     if @user.save
       UserMailer.account_created(@user.id, user_params[:password]).deliver
-      redirect_to(show_customer_path(@user), notice: 'User account created with read-only privileges')
+      redirect_to(show_customer_path(@customer), notice: 'User account created with read-only privileges')
     else
       render(:edit)
     end
