@@ -1,0 +1,23 @@
+<div class="head-under fl">Users</div>
+<%= link_to('Change email / password', edit_user_path(current_user), class: 'ml10 fl') %>
+<div class="reset"></div>
+<% if @users.any? %>
+    <table class="nice" cellpadding="0" cellspacing="0">
+      <tbody>
+      <tr>
+        <th>Email</th>
+        <th>Customer</th>
+        <th></th>
+      </tr>
+      <% @users.each do |user| %>
+          <tr>
+            <td style="padding: 5px;"><%= user.email %></td>
+            <td><%= user.customer.try(:full_name) || '[None]' %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="pad">No Users</div>
+<% end %>

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-      redirect_to(root_path, notice: 'Thanks for signing in.')
+      redirect_to(root_path, notice: "Welcome #{user.email}".strip)
     else
       request.flash[:error] = 'You should just give up!'
       render :new

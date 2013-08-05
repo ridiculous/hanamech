@@ -238,12 +238,12 @@ table th small {
     font-weight: normal;
 }
 
-div #out .luna-actions a,
-div #out .luna-actions a.luna-actions a:visited {
+div #out .customer-actions a,
+div #out .customer-actions a.customer-actions a:visited {
     text-decoration: none;
 }
 
-.luna-actions a {
+.customer-actions a {
     color: #FFF;
     margin-left: 10px;
     padding: 4px 12px;
@@ -251,23 +251,23 @@ div #out .luna-actions a.luna-actions a:visited {
     border-bottom: none;
 }
 
-.luna-actions a:hover,
-.luna-actions a.active {
+.customer-actions a:hover,
+.customer-actions a.active {
     background: #FFF;
     border: 1px solid graytext;
     border-bottom: none;
     color: #005AB3;
 }
 
-.customer-mode.luna-actions a:hover,
-.customer-mode.luna-actions a.active {
+.customer-mode.customer-actions a:hover,
+.customer-mode.customer-actions a.active {
     background: #C8E7F0;
     border: 1px solid graytext;
     border-bottom: none;
     color: #005AB3;
 }
 
-.customer-menu .luna-actions a {
+.customer-menu .customer-actions a {
     color: #005AB3;
     margin-left: 0;
 }
@@ -319,6 +319,14 @@ table.plain td.ra {
     padding: 6px 9px;
 }
 
+.alert {
+    border: 1px solid #003163;
+    line-height: 22px;
+    background-repeat: repeat-x;
+    background-color: #E3C700;
+    background-image: #E3C700;
+}
+
 .customer-menu {
     padding-bottom: 0;
     -moz-border-bottom-left-radius: 0;
@@ -327,4 +335,19 @@ table.plain td.ra {
     -moz-border-bottom-right-radius: 0;
     -webkit-border-bottom-right-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.total-row td {
+    border-top: 1px solid #CCC;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 200px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 15px;
 }

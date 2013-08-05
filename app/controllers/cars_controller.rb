@@ -8,11 +8,13 @@ class CarsController < ApplicationController
   include CarsHelper
 
   def index
-    @customer = Customer.find_by_id(params[:customer_id])
+    @customer = current_user.customers.find_by_id(params[:customer_id])
     if @customer
       @cars = @customer.cars
-    else
+    elsif current_user.luna?
       @cars = Car.includes(:customer)
+    else
+      redirect_to(logout_path) and return
     end
     @cars = @cars.order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(Constants::PER_PAGE)
   end
@@ -27,6 +29,7 @@ class CarsController < ApplicationController
   end
 
   def create
+    authorize! :create, @car
     @car.attributes = params.require(:car).permit!
     if @car.save
       redirect_to(my_car_path, :notice => 'Car was successfully created.')
@@ -36,6 +39,7 @@ class CarsController < ApplicationController
   end
 
   def update
+    authorize! :update, @car
     if @car.update_attributes(params.require(:car).permit!)
       redirect_to(my_car_path, :notice => 'Car was successfully updated.')
     else
@@ -44,11 +48,13 @@ class CarsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @car
     @car.destroy
     redirect_to(my_cars_path, notice: 'Car has been deleted')
   end
 
   private
+
   def sort_column
     Car.column_names.include?(params[:sort]) ? params[:sort] : "car_make"
   end

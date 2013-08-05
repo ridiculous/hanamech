@@ -33,13 +33,14 @@ module ApplicationHelper
   end
 
   def main_nav_links(in_customer_mode)
-    content_tag(:div, class: 'luna-actions'.send(:<<, in_customer_mode ? ' customer-mode' : '')) do
+    content_tag(:div, class: 'customer-actions'.send(:<<, in_customer_mode ? ' customer-mode' : '')) do
       concat link_to('Home', root_path, class: "#{'active' if controller_name == 'main'}")
-      concat link_to('Customers', customers_path, class: "#{'active' if controller_name == 'customers' || in_customer_mode}")
+      concat link_to('Customers', customers_path, class: "#{'active' if (controller_name == 'customers' || in_customer_mode) && controller_name != 'users'}")
       unless in_customer_mode
         concat link_to('Cars', cars_path, class: "#{'active' if controller_name == 'cars'}")
         concat link_to('Work Orders', workorders_path, class: "#{'active' if controller_name == 'workorders'}")
       end
+      concat link_to('Admin', users_path, class: "#{'active' if controller_name == 'users'}")
       concat link_to('Log out', logout_path, style: 'margin-right: 0;')
     end
   end

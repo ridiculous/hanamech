@@ -15,7 +15,11 @@
 
   <div id="out">
     <% set_customer_mode %>
-    <%= main_nav_links(in_customer_mode) %>
+    <div class="customer-actions customer-mode">
+      <%= link_to('Customers', customer_path(@customer), class: "#{'active' if controller_name != 'users'}") %>
+      <%= link_to('Change Email / Password', edit_user_path(current_user), class: "#{'active' if controller_name == 'users'}") %>
+      <%= link_to('Log out', logout_path, style: 'margin-right: 0;') %>
+    </div>
     <% if in_customer_mode %>
         <div class="customer-menu">
 
@@ -27,7 +31,6 @@
               <% end %>
           <% end %>
         </div>
-
     <% end %>
 
     <div id="container">

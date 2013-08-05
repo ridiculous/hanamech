@@ -6,10 +6,14 @@ class CustomersController < ApplicationController
   before_filter :set_customer, only: [:show, :edit, :destroy, :update]
 
   def index
-    if params[:id]
-      @customers = Customer.where("id = ?", params[:id]).order(sort_column + " " + sort_direction)
+    if current_user.luna?
+      @customers = if params[:id]
+                     Customer.where("id = ?", params[:id]).order(sort_column + " " + sort_direction)
+                   else
+                     Customer.order(sort_column + " " + sort_direction).page(params[:page]).per_page(Constants::PER_PAGE)
+                   end
     else
-      @customers = Customer.order(sort_column + " " + sort_direction).page(params[:page]).per_page(Constants::PER_PAGE)
+      redirect_to(customer_path(current_user.customer))
     end
   end
 
@@ -24,7 +28,7 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.new(params.require(:customer).permit!)
+    authorize! :create, @customer = Customer.new(params.require(:customer).permit!)
     if @customer.save
       redirect_to(@customer, :notice => 'Customer successfully created')
     else
@@ -33,14 +37,16 @@ class CustomersController < ApplicationController
   end
 
   def update
+    authorize! :update, @customer
     if @customer.update_attributes(params.require(:customer).permit!)
       redirect_to(customer_path(@customer), :notice => 'Record updated')
     else
-      render "edit"
+      render :edit
     end
   end
 
   def destroy
+    authorize! :destroy, @customer
     @customer.destroy
     redirect_to(customers_path, notice: "#{@customer} has been deleted")
   end

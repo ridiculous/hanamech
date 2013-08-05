@@ -2,8 +2,9 @@ class Customer < ActiveRecord::Base
 
   SEARCHABLE_FIELDS = %w[name phone email car]
 
+  has_one :user
   has_many :cars, dependent: :destroy
-
+  has_many :workorders, through: :cars
   validates :first_name, :last_name, presence: true
 
   def full_name

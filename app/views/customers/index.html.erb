@@ -1,5 +1,5 @@
 <div class="head-under fl">Customer List</div>
-<%= link_to 'New Customer', new_customer_path, class: 'ml10 fl' %>
+<%= link_to('New Customer', new_customer_path, class: 'ml10 fl') if can?(:create, Customer) %>
 <div class="reset"></div>
 <%= render_paging %>
 <table cellpadding="5" cellspacing="0" class="nice">
@@ -28,6 +28,6 @@
   <% end %>
 </table>
 <% if @customers.count > 14 %>
-    <hr/>
+    <br/>
     <p style="text-align: center; color: #66B7E7; font-size: 18px">>>><a href="#top">Top</a><<<</p>
 <% end %>

@@ -16,6 +16,8 @@ HanaMech::Application.routes.draw do
     get "printable/:id", :to => "workorders#printable"
   end
 
+  resources :users
+
   root to: "main#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

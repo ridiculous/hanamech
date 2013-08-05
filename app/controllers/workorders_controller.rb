@@ -8,6 +8,7 @@ class WorkordersController < ApplicationController
     @car = Car.find_by_id(params[:car_id])
     @workorders = if @car
                     @customer = @car.customer
+                    @total = @car.workorders.map(&:real_total).reduce(:+)
                     @car.workorders
                   else
                     Workorder.includes(:car)
@@ -26,6 +27,7 @@ class WorkordersController < ApplicationController
   end
 
   def create
+    authorize! :create, @workorder
     @workorder.attributes = params.require(:workorder).permit!
     if @workorder.save
       redirect_to(car_workorder_path(@workorder.car, @workorder), notice: 'Work Orders was successfully created')
@@ -35,6 +37,7 @@ class WorkordersController < ApplicationController
   end
 
   def update
+    authorize! :update, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
       redirect_to(car_workorder_path(@workorder.car, @workorder), :notice => 'Work Order was successfully updated')
     else
@@ -43,6 +46,7 @@ class WorkordersController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @workorder
     @workorder.destroy
     redirect_to(car_workorders_path(@car), notice: 'Work Orders has been deleted')
   end
