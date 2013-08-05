@@ -9,7 +9,12 @@ class SessionsController < ApplicationController
     if user
       reset_session
       set_current_user(user)
-      redirect_to(root_path, notice: 'Signed in')
+      if params[:remember_me]
+        cookies.permanent[:auth_token] = user.auth_token
+      else
+        cookies[:auth_token] = user.auth_token
+      end
+      redirect_to(root_path, notice: 'Thanks for signing in.')
     else
       request.flash[:error] = 'You should just give up!'
       render :new

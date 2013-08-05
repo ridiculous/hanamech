@@ -1,8 +1,23 @@
 <h3>Welcome. Please authorize</h3>
 <div>
   <%= form_tag(process_login_path, method: :post) do %>
-      <%= email_field_tag(:email) %>
-      <%= password_field_tag(:password) %>
-      <%= submit_tag('Log in') %>
+      <table>
+        <tbody>
+        <tr>
+          <th><%= label_tag(:email) %></th>
+          <th><%= label_tag(:password) %></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><%= email_field_tag(:email) %></td>
+          <td><%= password_field_tag(:password) %></td>
+          <td><%= submit_tag('Log in') %></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="field">
+        <%= check_box_tag(:remember_me) %> <%= label_tag(:remember_me) %>
+      </div>
+
   <% end %>
 </div>
