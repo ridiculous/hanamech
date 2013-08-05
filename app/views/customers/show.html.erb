@@ -2,7 +2,7 @@
 <% if @customer.user %>
     <%= link_to('Delete User Account', user_path(@customer.user), data: {confirm: "Are you sure you want to delete their user account?"}, method: :delete, class: 'delete') if can?(:destroy, User) %>
 <% else %>
-    <%= link_to 'Make User', new_user_path(customer_id: @customer) if can?(:create, User) %>
+    <%= link_to 'Make User', new_customer_user_path(@customer) if can?(:create, User) %>
 <% end %>
 <% if can?(:destroy, @customer) %>
     <%= link_to 'Delete', customer_path(@customer), data: {confirm: "Are you sure you want to delete #{@customer.first_name}?"}, method: :delete, class: 'delete' %>

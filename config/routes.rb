@@ -6,6 +6,7 @@ HanaMech::Application.routes.draw do
 
   resources :customers do
     resources :cars
+    resources :users, only: [:new]
   end
 
   resources :cars do
@@ -16,7 +17,7 @@ HanaMech::Application.routes.draw do
     get "printable/:id", :to => "workorders#printable"
   end
 
-  resources :users
+  resources :users, except: [:new]
 
   root to: "main#index"
   # The priority is based upon order of creation:
@@ -102,6 +103,8 @@ HanaMech::Application.routes.draw do
                    PATCH  /customers/:customer_id/cars/:id(.:format)        cars#update
                    PUT    /customers/:customer_id/cars/:id(.:format)        cars#update
                    DELETE /customers/:customer_id/cars/:id(.:format)        cars#destroy
+    customer_users POST   /customers/:customer_id/users(.:format)           users#create
+ new_customer_user GET    /customers/:customer_id/users/new(.:format)       users#new
          customers GET    /customers(.:format)                              customers#index
                    POST   /customers(.:format)                              customers#create
       new_customer GET    /customers/new(.:format)                          customers#new
@@ -135,6 +138,11 @@ edit_car_workorder GET    /cars/:car_id/workorders/:id/edit(.:format)       work
                    PATCH  /workorders/:id(.:format)                         workorders#update
                    PUT    /workorders/:id(.:format)                         workorders#update
                    DELETE /workorders/:id(.:format)                         workorders#destroy
-              root GET    /                                                 main#index                                                        main#index                                                 main#index
+             users GET    /users(.:format)                                  users#index
+         edit_user GET    /users/:id/edit(.:format)                         users#edit
+              user PATCH  /users/:id(.:format)                              users#update
+                   PUT    /users/:id(.:format)                              users#update
+                   DELETE /users/:id(.:format)                              users#destroy
+              root GET    /                                                 main#index                                                      main#index                                                 main#index
 =end
 end

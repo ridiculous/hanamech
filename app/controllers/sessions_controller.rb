@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    cookies.delete(:auth_token)
     reset_session
     render :new
   end

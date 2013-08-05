@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     authorize! :create, User
-    @users = User.all
+    @users = User.order(:email)
   end
 
   def edit
@@ -27,22 +27,25 @@ class UsersController < ApplicationController
 
   def new
     @customer = Customer.find_by_id(params[:customer_id])
-    if @customer.email.present?
-      @user = User.new(email: @customer.email, customer_id: @customer.id)
-    else
-      redirect_to(customer_path(@customer), alert: 'Customer needs an email address before a user account can be created for them.')
-    end
+    @user = User.new(email: @customer.email, customer_id: @customer.id)
   end
 
+  # should always has a customer
   def create
     authorize! :create, User
     user_params = params.require(:user).permit!
+
+    # generate temp password if none provided
     if user_params[:password].blank? && user_params[:password_confirmation].blank?
       user_params[:password] = user_params[:password_confirmation] = SecureRandom.urlsafe_base64.slice(0, 8)
     end
+
     @user = User.new(user_params)
     @customer = @user.customer
     if @user.save
+      if @customer.email.blank?
+        @customer.update_attribute(:email, @user.email)
+      end
       UserMailer.account_created(@user.id, user_params[:password]).deliver
       redirect_to(customer_path(@customer), notice: 'User account created with read-only privileges')
     else
