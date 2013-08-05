@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   def new
     @customer = Customer.find_by_id(params[:customer_id])
     @user = User.new(email: @customer.email, customer_id: @customer.id)
+    authorize! :new, @user
   end
 
   # should always has a customer
