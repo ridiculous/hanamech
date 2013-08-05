@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130804084134) do
+ActiveRecord::Schema.define(version: 20130805010002) do
 
   create_table "cars", force: true do |t|
     t.string   "car_make"
     t.string   "car_model"
     t.integer  "year"
-    t.decimal  "engine_size", precision: 11, scale: 0
+    t.string   "engine_size"
     t.string   "vin_number"
     t.integer  "customer_id"
     t.datetime "created_at"
