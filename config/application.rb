@@ -36,7 +36,18 @@ module HanaMech
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        domain: 'heroku.com', # the domain your emails will come from
+        address: 'smtp.sendgrid.net', # SMTP server used to send emails
+        port: '587',
+        authentication: :plain,
+        user_name: ENV["SENDGRID_USERNAME"],
+        password: ENV["SENDGRID_PASSWORD"],
+        enable_starttls_auto: true
+    }
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
