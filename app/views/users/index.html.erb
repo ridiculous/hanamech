@@ -7,12 +7,14 @@
       <tr>
         <th>Email</th>
         <th>Customer</th>
+        <th>Last login</th>
         <th></th>
       </tr>
       <% @users.each do |user| %>
           <tr>
             <td style="padding: 5px;"><%= user.email %></td>
-            <td><%= user.customer.try(:full_name) || '[None]' %></td>
+            <td><%= user.customer.try(:full_name) %></td>
+            <td><%= user.last_login || 'Never' %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>
           </tr>
       <% end %>

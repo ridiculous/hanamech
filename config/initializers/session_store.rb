@@ -1,8 +1,3 @@
 # Be sure to restart your server when you modify this file.
 
-HanaMech::Application.config.session_store :cookie_store, :key => '_hana_mech_session'
-
-# Use the database for sessions instead of the cookie-based default,
-# which shouldn't be used to store highly confidential information
-# (create the session table with "rails generate session_migration")
-# HanaMech::Application.config.session_store :active_record_store
+HanaMech::Application.config.session_store :cookie_store, key: '_HanaMech_session'

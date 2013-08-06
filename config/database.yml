@@ -30,7 +30,7 @@
 development:
   host: localhost
   adapter: postgresql
-  database: hana_mech_production
+  database: hana_mech_development
   pool: 5
   username: postgres
   password: access

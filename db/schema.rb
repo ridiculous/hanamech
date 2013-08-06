@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20130805032253) do
     t.string   "car_make"
     t.string   "car_model"
     t.integer  "year"
-    t.string   "engine_size"
+    t.decimal  "engine_size", precision: 11, scale: 0
     t.string   "vin_number"
     t.integer  "customer_id"
     t.datetime "created_at"

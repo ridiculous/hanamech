@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     user = User.where(email: params[:email]).first.try(:authenticate, params[:password])
     if user
       reset_session
+      user.update_attribute(:last_login, Time.now)
       set_current_user(user)
       if params[:remember_me]
         cookies.permanent[:auth_token] = user.auth_token

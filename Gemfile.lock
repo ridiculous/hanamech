@@ -26,10 +26,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.0)
-    atomic (1.1.11)
+    atomic (1.1.12)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
-    bcrypt-ruby (3.0.1-x86-mingw32)
     better_errors (0.9.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -49,7 +48,6 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     eventmachine (1.0.3)
-    eventmachine (1.0.3-x86-mingw32)
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.3)
@@ -66,10 +64,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     minitest (4.7.5)
-    multi_json (1.7.7)
+    multi_json (1.7.8)
     newrelic_rpm (3.6.6.147)
     pg (0.16.0)
-    pg (0.16.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -128,7 +125,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   awesome_print
