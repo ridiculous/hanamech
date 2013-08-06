@@ -14,7 +14,7 @@
           <tr>
             <td style="padding: 5px;"><%= user.email %></td>
             <td><%= user.customer.try(:full_name) %></td>
-            <td><%= user.last_login || 'Never' %></td>
+            <td><%= user.last_login.try(:in_time_zone, 'Hawaii').try(:strftime, '%d %b %H:%M %p') || 'Never' %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>
           </tr>
       <% end %>
