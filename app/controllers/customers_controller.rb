@@ -8,10 +8,11 @@ class CustomersController < ApplicationController
   def index
     if current_user.luna?
       @customers = if params[:id]
-                     Customer.where("id = ?", params[:id]).order(sort_column + " " + sort_direction)
+                     Customer.where("id = ?", params[:id])
                    else
-                     Customer.order(sort_column + " " + sort_direction).page(params[:page]).per_page(Constants::PER_PAGE)
+                     Customer.all
                    end
+      @customers = @customers.order("LOWER(#{sort_column}) #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
     else
       redirect_to(customer_path(current_user.customer))
     end
