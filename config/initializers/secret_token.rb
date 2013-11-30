@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-HanaMech::Application.config.secret_key_base = 'b6aca678fb61c860e6680d9bb5ac86c872e2ba6a4ba3d576173a44bbe6659fce799fd64c1cb6b518bfc3b9d6d3c7a1187b6de29ee34aa8f5ea09c0b9272909ef'
+HanaMech::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
