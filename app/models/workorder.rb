@@ -14,8 +14,10 @@ class Workorder < ActiveRecord::Base
 
   accepts_nested_attributes_for :workorder_parts, allow_destroy: true
   accepts_nested_attributes_for :workorder_jobs, allow_destroy: true
+  accepts_nested_attributes_for :customer
+  accepts_nested_attributes_for :car
 
-  validates :details, :car_id, presence: true
+  validates :car_id, presence: true
 
   attr_accessor :misc_supplies, :labor_total, :sublet_repairs, :paid_in_advance, :tax_total, :parts_total,
                 :authorized_by, :balance_due

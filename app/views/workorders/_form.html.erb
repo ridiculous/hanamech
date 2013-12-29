@@ -56,7 +56,7 @@
                 Phone
               </div>
               <div class="fl" style="width: 64%">
-                <%= f.fields_for(:customer) { |cf| cf.text_field(:phone, class: 'num') } %>
+                <%= f.fields_for(:customer) { |cf| cf.text_field(:phone_number, class: 'num') } %>
               </div>
             </td>
           </tr>
@@ -213,10 +213,11 @@
       <div class="num shaded" style="height: 42px;"></div>
     </div>
     <div class="fr shaded" style="border: 1px solid #666; border-top: none;">
-      <div class="num shaded" style="font-size: 17px;font-weight: bold; padding: 10px 4px; height: 22px;">Balance
+      <div class="num shaded" style="font-size: 13px;font-weight: bold; padding: 10px 3px 10px 0;width:81px;height: 22px;">Balance
         Due
       </div>
     </div>
+    <div class="fr pt10"><%= f.submit %></div>
     <div class="reset"></div>
 <% end %>
 </div>

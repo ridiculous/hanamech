@@ -4,6 +4,11 @@ class WorkorderPart < ActiveRecord::Base
 
   accepts_nested_attributes_for :part
 
-  validates :quantity, numericality: true
+  def self.calc_total
+    where(nil).sum(&:cost)
+  end
 
+  def cost
+    (quantity.to_f || 0) * (part.try(:price).to_f || 0)
+  end
 end

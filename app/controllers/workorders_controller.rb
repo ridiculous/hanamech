@@ -29,8 +29,7 @@ class WorkordersController < ApplicationController
 
   def create
     authorize! :create, @workorder
-    @workorder.attributes = params.require(:workorder).permit!
-    if @workorder.save
+    if @workorder.update_attributes(params.require(:workorder).permit!)
       redirect_to(car_workorder_path(@workorder.car, @workorder), notice: 'Work Orders was successfully created')
     else
       render(:new)

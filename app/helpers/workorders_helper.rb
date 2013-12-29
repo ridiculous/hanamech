@@ -1,7 +1,7 @@
 module WorkordersHelper
 
   def materials_list(mats)
-    if mats.empty?
+    if mats.blank?
       content_tag(:li, "None")
     else
       mats.split(/, /).collect{|mat| content_tag :li, mat}.join

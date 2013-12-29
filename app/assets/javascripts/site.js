@@ -6,7 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-jUtils.addEvent(window, 'load', function () {
-    bindDeleteLinks();
-    bindWorkOrderHelper();
-});
+//jUtils.addEvent(window, 'load', function () {
+//    bindDeleteLinks();
+//});

@@ -106,17 +106,17 @@
             </tr>
             <tr>
               <th align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163; border-left: 1px solid #003163">Parts</th>
-              <td align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$"+@workorder.parts unless @workorder.parts.empty? %></td>
+              <td align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$#{@workorder.workorder_parts.calc_total}" %></td>
             </tr>
             <th align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163; border-left: 1px solid #003163">Labor</th>
-            <td align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$"+@workorder.labor unless @workorder.labor.empty? %></td>
+            <td align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$#{@workorder.labor || '0.00'}" %></td>
             <tr>
               <th align="left" style="width:30%; border-bottom: 1px solid #003163; border-right: 1px solid #003163; border-left: 1px solid #003163">Tax</th>
-              <td align="left" style="width:70%; border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$"+@workorder.tax unless @workorder.tax.empty? %></td>
+              <td align="left" style="width:70%; border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$#{@workorder.tax || '0.00'}" %></td>
             </tr>
             <tr>
               <th align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163; border-left: 1px solid #003163">Total</th>
-              <td align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$"+@workorder.total unless @workorder.total.empty? %></td>
+              <td align="left" style="border-bottom: 1px solid #003163; border-right: 1px solid #003163;"><%= "$#{@workorder.total || '0.00'}" %></td>
             </tr>
           </table>
         </div>

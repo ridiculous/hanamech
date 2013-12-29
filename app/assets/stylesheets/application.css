@@ -211,6 +211,10 @@ h2 {
     padding-top: 5px;
 }
 
+.pt10 {
+    padding-top: 10px;
+}
+
 .fr {
     float: right;
 }
