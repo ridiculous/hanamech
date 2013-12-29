@@ -16,12 +16,12 @@
       </tr>
       <% @workorders.each do |workorder| %>
           <tr>
-            <td><%= link_to workorder.date, my_wo_path(workorder) %></td>
+            <td><%= link_to workorder.date, edit_workorder_path(workorder) %></td>
             <td><%= workorder.details %></td>
             <td><%= workorder.materials %></td>
             <td><%= workorder.odometer %></td>
             <td><%= "$"+workorder.total if workorder.total.present? %></td>
-            <td><%= link_to 'View', my_wo_path(workorder) %></td>
+            <td><%= link_to 'Print', '#' %></td>
             <td><%= link_to 'Edit', edit_workorder_path(workorder) if can?(:update, workorder) %></td>
             <td>
               <% if can?(:destroy, workorder) %>
@@ -44,7 +44,7 @@
       <% end %>
     </table>
     <br />
-    <p style="text-align: center; color: #66B7E7; font-size: 18px">>>><a href="#top">Top</a><<<</p>
+    <p style="text-align: center; color: #66B7E7; font-size: 18px"><a href="#top">Top</a></p>
 <% else %>
     <br/>
     <p><span class="noneyet">This car has no work orders </span></p>

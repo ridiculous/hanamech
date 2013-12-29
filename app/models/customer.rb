@@ -5,7 +5,9 @@ class Customer < ActiveRecord::Base
   has_one :user
   has_many :cars, dependent: :destroy
   has_many :workorders, through: :cars
-  validates :first_name, :last_name, presence: true
+  validates :name, presence: true
+
+  before_validation :set_first_last_name
 
   def full_name
     "#{last_name}, #{first_name}"
@@ -13,6 +15,14 @@ class Customer < ActiveRecord::Base
 
   def to_s
     first_name
+  end
+
+  def set_first_last_name
+    self.first_name, self.last_name = name.split(' ')
+  end
+
+  def set_name
+     self.name = "#{first_name} #{last_name}"
   end
 
   class << self

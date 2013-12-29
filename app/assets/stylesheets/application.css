@@ -55,8 +55,7 @@ div.field, div.actions {
 }
 
 .field_with_errors {
-    padding: 2px;
-    background-color: #66B7E7;
+    background-color: #FBF2EF;
     display: table;
 }
 

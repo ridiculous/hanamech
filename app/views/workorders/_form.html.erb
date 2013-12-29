@@ -25,37 +25,41 @@
       <div>
         <table class="btable" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="70%">
+            <th width="65%"></th>
+            <th width="35%"></th>
+          </tr>
+          <tr>
+            <td>
               <div class="fl">
                 Name
               </div>
-              <div class="fl" style="width: 85%">
+              <div class="fl" style="width: 87%">
                 <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:name, class: 'center') } } %>
               </div>
             </td>
-            <td width="30%">
+            <td>
               <div class="fl">
                 Date
               </div>
-              <div class="fl" style="width: 67%">
-                <%= f.text_field(:date, class: 'num') %>
+              <div class="fl" style="width: 75%">
+                <%= f.text_field(:date, class: 'num date-field') %>
               </div>
             </td>
           </tr>
           <tr>
-            <td width="70%">
+            <td>
               <div class="fl">
                 Address
               </div>
-              <div class="fl" style="width: 79%">
+              <div class="fl" style="width: 77%">
                 <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:street, class: 'center') } } %>
               </div>
             </td>
-            <td width="30%">
+            <td>
               <div class="fl">
                 Phone
               </div>
-              <div class="fl" style="width: 64%">
+              <div class="fl" style="width: 69%">
                 <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:phone_number, class: 'num') } } %>
               </div>
             </td>
@@ -65,7 +69,7 @@
               <div class="fl">
                 City, State
               </div>
-              <div class="fl" style="width: 67%">
+              <div class="fl" style="width: 77%">
                 <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:city_state, class: 'center') } } %>
               </div>
             </td>

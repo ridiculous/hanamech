@@ -3,6 +3,11 @@ class WorkordersController < ApplicationController
   before_filter :set_cars, only: [:edit, :update, :new, :create]
   before_filter :set_workorder, except: :index
 
+  before_filter only: [:create, :update] do
+    wo = params[:workorder]
+    wo[:date].try(:gsub!, %r{(\d{2})/(\d{2})/(\d+)}, '\3-\1-\2')
+  end
+
 
   def index
     @car = Car.find_by_id(params[:car_id])
@@ -21,6 +26,7 @@ class WorkordersController < ApplicationController
 
   def new
     @workorder.prepare
+    @workorder.date = Date.today
   end
 
   def edit
@@ -30,7 +36,7 @@ class WorkordersController < ApplicationController
   def create
     authorize! :create, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(car_workorder_path(@workorder.car, @workorder), notice: 'Work Orders was successfully created')
+      redirect_to(car_workorders_path(@workorder.car), notice: 'Work Orders was successfully created')
     else
       render(:new)
     end
@@ -39,7 +45,7 @@ class WorkordersController < ApplicationController
   def update
     authorize! :update, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(car_workorder_path(@workorder.car, @workorder), :notice => 'Work Order was successfully updated')
+      redirect_to(car_workorders_path(@workorder.car), :notice => 'Work Order was successfully updated')
     else
       render "edit"
     end
