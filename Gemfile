@@ -7,7 +7,7 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-#gem 'mysql2'
+
 gem 'thin'
 gem 'will_paginate', '~> 3.0.0'
 

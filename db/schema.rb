@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805032253) do
+ActiveRecord::Schema.define(version: 20131229005853) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "cars", force: true do |t|
     t.string   "car_make"
@@ -32,6 +35,22 @@ ActiveRecord::Schema.define(version: 20130805032253) do
     t.string   "cell_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "street"
+    t.string   "city_state"
+  end
+
+  create_table "jobs", force: true do |t|
+    t.string   "name"
+    t.string   "hours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parts", force: true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -43,6 +62,22 @@ ActiveRecord::Schema.define(version: 20130805032253) do
     t.datetime "updated_at"
     t.string   "auth_token"
     t.integer  "customer_id"
+  end
+
+  create_table "workorder_jobs", force: true do |t|
+    t.integer  "workorder_id", null: false
+    t.integer  "job_id",       null: false
+    t.string   "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workorder_parts", force: true do |t|
+    t.integer  "part_id"
+    t.integer  "workorder_id"
+    t.float    "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "workorders", force: true do |t|

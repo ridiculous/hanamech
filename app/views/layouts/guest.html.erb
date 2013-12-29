@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Hana Mechanical</title>
+  <title><%= Constants::NAME %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
 <div>
   <a name="top"></a>
 
-  <p class="head-er">Hana Mechanical</p>
+  <p class="head-er"><%= Constants::NAME %></p>
 
   <div id="out">
     <% set_customer_mode %>

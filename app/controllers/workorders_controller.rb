@@ -20,10 +20,11 @@ class WorkordersController < ApplicationController
   end
 
   def new
-    @workorder.car || @workorder.build_car
+    @workorder.prepare
   end
 
   def edit
+    @workorder.prepare
   end
 
   def create

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Hana Mechanical</title>
+  <title><%= Constants::NAME %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
 <div>
   <a name="top"></a>
 
-  <p class="head-er">Hana Mechanical</p>
+  <p class="head-er"><%= Constants::NAME %></p>
 
   <div id="out">
     <% set_customer_mode %>
@@ -22,8 +22,8 @@
           <%= content_tag(:span, class: 'customer-actions') do %>
               <%= link_to(@customer.full_name, customer_path(@customer), class: "#{'active' if controller_name == 'customers'}") %>
               <%= link_to('Cars', customer_cars_path(@customer), class: "#{'active' if request.path =~ /(cars|cars\/new)\z/}") %>
-              <% @customer.cars.reject(&:new_record?).slice(0, 3).each do |car| %>
-                  <%= link_to(car.name, customer_car_path(@customer, car), class: "#{'active' if request.path =~ Regexp.new(car.id.to_s)}") %>
+              <% @customer.cars.reject(&:new_record?).slice(0, 5).each do |car| %>
+                  <%= link_to(car.name, customer_car_path(@customer, car), class: "#{'active' if request.path =~ Regexp.new("cars/#{car.id}$")}") %>
               <% end %>
           <% end %>
         </div>

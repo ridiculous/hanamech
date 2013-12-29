@@ -28,7 +28,7 @@
         <th>Cell</th>
         <th>Cars</th>
       </tr>
-      <% for customer in @selected_customers %>
+      <% @selected_customers.each do |customer|  %>
           <tr>
             <td><%= link_to(customer.first_name+' '+customer.last_name, edit_customer_path(customer)) %></td>
             <td><%= customer.phone_number %></td>
