@@ -28,6 +28,7 @@ class Workorder < ActiveRecord::Base
 
   def prepare
     car || build_car
+    car.customer || car.build_customer
     build_parts
     build_jobs
   end

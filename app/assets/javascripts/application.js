@@ -1,4 +1,4 @@
-//= require jutils
+//= require jquery
 //= require rails_shim
 //= require workorder
 //= require site

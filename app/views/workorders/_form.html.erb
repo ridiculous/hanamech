@@ -30,7 +30,7 @@
                 Name
               </div>
               <div class="fl" style="width: 85%">
-                <%= f.fields_for(:customer) { |cf| cf.text_field(:name, class: 'center') } %>
+                <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:name, class: 'center') } } %>
               </div>
             </td>
             <td width="30%">
@@ -48,7 +48,7 @@
                 Address
               </div>
               <div class="fl" style="width: 79%">
-                <%= f.fields_for(:customer) { |cf| cf.text_field(:street, class: 'center') } %>
+                <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:street, class: 'center') } } %>
               </div>
             </td>
             <td width="30%">
@@ -56,7 +56,7 @@
                 Phone
               </div>
               <div class="fl" style="width: 64%">
-                <%= f.fields_for(:customer) { |cf| cf.text_field(:phone_number, class: 'num') } %>
+                <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:phone_number, class: 'num') } } %>
               </div>
             </td>
           </tr>
@@ -66,7 +66,7 @@
                 City, State
               </div>
               <div class="fl" style="width: 67%">
-                <%= f.fields_for(:customer) { |cf| cf.text_field(:city_state, class: 'center') } %>
+                <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:city_state, class: 'center') } } %>
               </div>
             </td>
           </tr>
