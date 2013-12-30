@@ -8,4 +8,7 @@ class WorkorderJob < ActiveRecord::Base
     Float(total) rescue 0
   end
 
+  def autosave_associated_records_for_job
+    self.job_id = Job.where(name: job.name).first_or_create!(hours: hours).id
+  end
 end

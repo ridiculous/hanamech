@@ -72,20 +72,11 @@ class WorkordersController < ApplicationController
 
   def set_workorder
     @workorder = if params[:car_id]
-                   @car = Car.find(params[:car_id])
-                   if params[:id]
-                     @car.workorders.find(params[:id])
-                   else
-                     @car.workorders.new
-                   end
+                   Car.find(params[:car_id]).workorders.find_or_initialize(params[:id])
                  else
-                   if params[:id]
-                     Workorder.find(params[:id])
-                   else
-                     Workorder.new
-                   end
+                   Workorder.find_or_initialize(params[:id])
                  end
-    @car ||= @workorder.car
+    @car = @workorder.car
     @customer = @car.customer if @car
     @workorder.odometer ||= @car.try(:odometer)
   end

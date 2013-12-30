@@ -11,4 +11,8 @@ class WorkorderPart < ActiveRecord::Base
   def cost
     (quantity.to_f || 0) * (part.try(:price).to_f || 0)
   end
+
+  def autosave_associated_records_for_part
+    self.part_id = Part.by_name!(part.name, price: price).id
+  end
 end

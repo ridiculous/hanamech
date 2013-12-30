@@ -89,7 +89,7 @@
             <tr>
               <td width="20%"><%= wo_part.text_field(:quantity, class: 'num') %></td>
               <td width="59%"><%= wo_part.fields_for(:part) { |part| part.text_field(:name) } %></td>
-              <td width="20%"><%= wo_part.fields_for(:part) { |part| part.text_field(:price, class: 'num') } %></td>
+              <td width="20%"><%= wo_part.text_field(:price, class: 'num') %></td>
             </tr>
         <% end %>
         <tr>
@@ -136,7 +136,7 @@
         </tr>
         <%= f.fields_for(:workorder_jobs) do |woj| %>
             <tr>
-              <td width="20%"><%= woj.fields_for(:job) { |jf| jf.text_field(:hours, class: 'num') } %></td>
+              <td width="20%"><%= woj.text_field(:hours, class: 'num') %></td>
               <td width="59%"><%= woj.fields_for(:job) { |jf| jf.text_field(:name) } %></td>
               <td width="20%"><%= woj.text_field(:total, class: 'num') %></td>
             </tr>

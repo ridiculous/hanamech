@@ -24,6 +24,12 @@ class Workorder < ActiveRecord::Base
   attr_accessor :misc_supplies, :labor_total, :sublet_repairs, :paid_in_advance, :tax_total, :parts_total,
                 :balance_due
 
+  class << self
+    def find_or_initialize(record_id=nil)
+      record_id.present? ? find(record_id) : new
+    end
+  end
+
   def real_total
     Float(total) rescue 0
   end

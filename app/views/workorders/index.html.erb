@@ -17,7 +17,7 @@
           <tr>
             <td><%= link_to workorder.date, edit_workorder_path(workorder) %></td>
             <td><%= workorder.customer.try(:name) || '[None]' %></td>
-            <td><%= workorder.jobs.map(&:name).join(',') %></td>
+            <td><%= workorder.jobs.map(&:name).join(', ') %></td>
             <td><%= "$"+workorder.total if workorder.total.present? %></td>
             <td><%= link_to 'Print', '#' %></td>
             <td><%= link_to 'Edit', edit_workorder_path(workorder) if can?(:update, workorder) %></td>

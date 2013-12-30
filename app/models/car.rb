@@ -6,7 +6,7 @@ class Car < ActiveRecord::Base
 
   validates :year_make_model, :customer, presence: true
 
-  before_validation :set_year_make_model
+  after_validation :set_year_make_model
 
   def name
     wip = "#{car_make} #{car_model}"
@@ -16,7 +16,7 @@ class Car < ActiveRecord::Base
 
   def set_year_make_model
     tmp_year, self.car_make, *tmp_model = year_make_model.split(/\s/)
-    self.year = tmp_year.gsub(/[^\d]+/, '')
+    self.year = tmp_year.try(:gsub, /[^\d]+/, '')
     self.car_model = tmp_model.join(' ')
   end
 

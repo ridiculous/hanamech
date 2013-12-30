@@ -1,4 +1,3 @@
-puts 'Extensions!!!'
 module ArrayExtensions
   def m(name)
     map(&name.to_sym)
