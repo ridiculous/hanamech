@@ -1,5 +1,5 @@
 class WorkordersController < ApplicationController
-  before_filter :authenticate_user
+
   before_filter :set_cars, only: [:edit, :update, :new, :create]
   before_filter :set_workorder, except: :index
 
@@ -36,7 +36,7 @@ class WorkordersController < ApplicationController
   def create
     authorize! :create, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(car_workorders_path(@workorder.car), notice: 'Work Orders was successfully created')
+      redirect_to(car_workorders_path(@workorder.car), notice: 'Workorder created')
     else
       render(:new)
     end
@@ -45,7 +45,7 @@ class WorkordersController < ApplicationController
   def update
     authorize! :update, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(car_workorders_path(@workorder.car), :notice => 'Work Order was successfully updated')
+      redirect_to(edit_car_workorder_path(@workorder.car, @workorder), :notice => 'Workorder updated')
     else
       render "edit"
     end

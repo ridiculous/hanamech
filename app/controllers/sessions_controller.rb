@@ -27,4 +27,12 @@ class SessionsController < ApplicationController
     reset_session
     render :new
   end
+
+  private
+
+  # override and silence
+  def authenticate_user
+    # no-op
+  end
+
 end

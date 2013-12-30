@@ -12,17 +12,14 @@ class Workorder < ActiveRecord::Base
   has_many :workorder_jobs
   has_many :jobs, through: :workorder_jobs
 
-  accepts_nested_attributes_for :workorder_parts, allow_destroy: true, reject_if: :incomplete?
-  accepts_nested_attributes_for :workorder_jobs, allow_destroy: true, reject_if: :incomplete?
+  accepts_nested_attributes_for :workorder_parts, allow_destroy: true, reject_if: :incomplete_item?
+  accepts_nested_attributes_for :workorder_jobs, allow_destroy: true, reject_if: :incomplete_item?
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :car, allow_destroy: true
 
   validates :car, :date, presence: true
 
   after_validation :copy_odometer_to_car
-
-  attr_accessor :misc_supplies, :labor_total, :sublet_repairs, :paid_in_advance, :tax_total, :parts_total,
-                :balance_due
 
   class << self
     def find_or_initialize(record_id=nil)
@@ -53,13 +50,18 @@ class Workorder < ActiveRecord::Base
     end
   end
 
-  def incomplete?(obj)
-    obj.each_value.detect do |val|
+  def incomplete_item?(obj)
+    suspect = obj.each_value.detect do |val|
       if val.respond_to?(:values)
         val.values.any?(&:blank?)
       else
         val.blank?
       end
+    end
+    if suspect && obj.has_key?(:id)
+      !(obj[:_destroy] = true)
+    else
+      suspect
     end
   end
 

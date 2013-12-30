@@ -43,11 +43,16 @@ group :development do
   gem 'binding_of_caller'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'cancan'
 gem 'newrelic_rpm'
+gem 'wicked_pdf', '~> 0.7.9'
 
 # Use unicorn as the app server
 # gem 'unicorn'

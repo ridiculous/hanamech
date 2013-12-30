@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_filter :authenticate_user
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to(logout_path)
   end
@@ -8,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :set_customer_mode, :in_customer_mode, :current_user, :sort_column, :sort_direction
   hide_action :set_customer_mode, :in_customer_mode
 
-  layout :provision
+  layout :pick_layout
 
   def set_customer_mode
     @in_customer_mode = @customer.present? && @customer.persisted?
@@ -41,8 +43,7 @@ class ApplicationController < ActionController::Base
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
-
-  private
+  protected
 
   def authenticate_user
     if !session || !current_user
@@ -50,7 +51,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def provision
+  private
+
+  def pick_layout
     if current_user.try(:luna?)
       'application'
     else

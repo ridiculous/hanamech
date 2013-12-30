@@ -9,6 +9,6 @@ class WorkorderJob < ActiveRecord::Base
   end
 
   def autosave_associated_records_for_job
-    self.job_id = Job.where(name: job.name).first_or_create!(hours: hours).id
+    self.job_id = Job.by_name!(job.name, hours: hours).id
   end
 end
