@@ -1,8 +1,6 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_user
 
-  helper_method :sort_column, :sort_direction
-
   before_filter :set_customer, only: [:show, :edit, :destroy, :update]
 
   def index
@@ -59,10 +57,6 @@ class CustomersController < ApplicationController
   end
 
   def sort_column
-    Customer.column_names.include?(params[:sort]) ? params[:sort] : "last_name"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    super('last_name')
   end
 end

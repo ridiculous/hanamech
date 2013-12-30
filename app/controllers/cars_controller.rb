@@ -1,8 +1,6 @@
 class CarsController < ApplicationController
   before_filter :authenticate_user
 
-  helper_method :sort_column, :sort_direction
-
   before_filter :set_car, except: :index
 
   include CarsHelper
@@ -56,11 +54,7 @@ class CarsController < ApplicationController
   private
 
   def sort_column
-    Car.column_names.include?(params[:sort]) ? params[:sort] : "car_make"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    super('car_make')
   end
 
   def set_car

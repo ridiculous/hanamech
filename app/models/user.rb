@@ -19,10 +19,6 @@ class User < ActiveRecord::Base
     luna? ? Workorder.all : super
   end
 
-  def luna?
-    customer_id.nil? && luna
-  end
-
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64

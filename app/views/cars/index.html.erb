@@ -20,7 +20,7 @@
             <td><%= car.car_model %></td>
             <td><%= car.year %></td>
             <td><%= car.vin_number %></td>
-            <td><%= car.customer.try(:full_name) %></td>
+            <td><%= car.customer.try(:name) %></td>
             <td><%= link_to 'Edit', edit_customer_car_path(car.customer, car) if can?(:update, car) %></td>
             <td><%= link_to "Work Orders (#{car.workorders.count})", car_workorders_path(car) %> <%=  %></td>
             <td>

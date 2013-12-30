@@ -87,6 +87,7 @@ class WorkordersController < ApplicationController
                  end
     @car ||= @workorder.car
     @customer = @car.customer if @car
+    @workorder.odometer ||= @car.try(:odometer)
   end
 
 end

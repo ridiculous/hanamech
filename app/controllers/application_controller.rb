@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     redirect_to(logout_path)
   end
 
-  helper_method :set_customer_mode, :in_customer_mode, :current_user
+  helper_method :set_customer_mode, :in_customer_mode, :current_user, :sort_column, :sort_direction
   hide_action :set_customer_mode, :in_customer_mode
 
   layout :provision
@@ -24,7 +24,23 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by!(auth_token: cookies[:auth_token]) if cookies[:auth_token]
+  rescue ActiveRecord::RecordNotFound
+    Rails.logger.warn("Could not find user in #{__method__}")
+    nil
   end
+
+  def sort_column(default='id')
+    if controller_name.singularize.titleize.constantize.column_names.include?(params[:sort])
+      params[:sort]
+    else
+      default
+    end
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+
 
   private
 

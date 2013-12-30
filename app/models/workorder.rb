@@ -19,6 +19,8 @@ class Workorder < ActiveRecord::Base
 
   validates :car, :date, presence: true
 
+  after_validation :copy_odometer_to_car
+
   attr_accessor :misc_supplies, :labor_total, :sublet_repairs, :paid_in_advance, :tax_total, :parts_total,
                 :balance_due
 
@@ -53,6 +55,10 @@ class Workorder < ActiveRecord::Base
         val.blank?
       end
     end
+  end
+
+  def copy_odometer_to_car
+    car.odometer = odometer if odometer.to_i > car.try(:odometer).to_i
   end
 end
 

@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def sortable(column, title = nil)
-    title ||= column.titleize
+    title ||= column.to_s.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
@@ -34,13 +34,15 @@ module ApplicationHelper
 
   def main_nav_links(in_customer_mode)
     content_tag(:div, class: 'customer-actions'.send(:<<, in_customer_mode ? ' customer-mode' : '')) do
-      concat link_to('Home', root_path, class: "#{'active' if controller_name == 'main'}")
-      concat link_to('Customers', customers_path, class: "#{'active' if (controller_name == 'customers' || in_customer_mode) && controller_name != 'users'}")
+      concat link_to('Home', root_path, class: "#{'active' if at? 'main'}")
+      concat link_to('Customers', customers_path, class: "#{'active' if (at? 'customers' || in_customer_mode) && controller_name != 'users'}")
       unless in_customer_mode
-        concat link_to('Cars', cars_path, class: "#{'active' if controller_name == 'cars'}")
-        concat link_to('Work Orders', workorders_path, class: "#{'active' if controller_name == 'workorders'}")
+        concat link_to('Cars', cars_path, class: "#{'active' if at? 'cars'}")
+        concat link_to('Work Orders', workorders_path, class: "#{'active' if at? 'workorders'}")
+        concat link_to('Jobs', jobs_path, class: "#{'active' if at? 'jobs'}")
+        concat link_to('Parts', parts_path, class: "#{'active' if at? 'parts'}")
       end
-      concat link_to('Admin', users_path, class: "#{'active' if controller_name == 'users'}")
+      concat link_to('Admin', users_path, class: "#{'active' if at? 'users'}")
       concat link_to('Log out', logout_path, style: 'margin-right: 0;')
     end
   end
@@ -58,5 +60,9 @@ module ApplicationHelper
         end
       end
     end
+  end
+
+  def at?(name='')
+    controller_name == name
   end
 end
