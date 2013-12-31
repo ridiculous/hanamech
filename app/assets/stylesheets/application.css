@@ -410,6 +410,7 @@ input[type=password] {
     color: white;
 }
 
+.sub-cell,
 table tr td .sub-cell,
 .ctable td {
     padding: 0 3px;
@@ -435,6 +436,7 @@ table tr td .sub-cell,
     height: 26px;
 }
 
+div .table-input,
 .ctable tr td input[type=text],
 .btable td input[type=text] {
     width: 100%;
@@ -448,6 +450,7 @@ table tr td .sub-cell,
     background: rgba(0, 0, 0, 0);
 }
 
+div .table-input:focus,
 .btable tr td input,
 .ctable tr td input:focus {
     outline: none;

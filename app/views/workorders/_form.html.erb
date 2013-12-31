@@ -87,15 +87,15 @@
         </tr>
         <%= f.fields_for(:workorder_parts) do |wo_part| %>
             <tr>
-              <td width="20%"><%= wo_part.text_field(:quantity, class: 'num') %></td>
+              <td width="20%"><%= wo_part.text_field(:quantity, class: 'num part-quantity') %></td>
               <td width="59%"><%= wo_part.fields_for(:part) { |part| part.text_field(:name) } %></td>
-              <td width="20%"><%= wo_part.text_field(:price, class: 'num') %></td>
+              <td width="20%"><%= wo_part.text_field(:price, class: 'num part-price') %></td>
             </tr>
         <% end %>
         <tr>
           <td colspan="2" class="num">Total Parts</td>
           <td>
-            <input type="text" value="0.00" name="total_parts" class="num" disabled="disabled" style="height: 19px;"/>
+            <input type="text" value="0.00" name="total_parts" id="total_parts" class="num" disabled="disabled" style="height: 19px;"/>
           </td>
         </tr>
       </table>
@@ -138,7 +138,7 @@
             <tr>
               <td width="20%"><%= woj.text_field(:hours, class: 'num') %></td>
               <td width="59%"><%= woj.fields_for(:job) { |jf| jf.text_field(:name) } %></td>
-              <td width="20%"><%= woj.text_field(:total, class: 'num') %></td>
+              <td width="20%"><%= woj.text_field(:total, class: 'num labor-total') %></td>
             </tr>
         <% end %>
         <tr>
@@ -152,13 +152,13 @@
               </tr>
               <tr>
                 <td class="xx-small sub-cell" style="padding-right: 0">MISC. Supplies</td>
-                <td class="bl" style="padding: 0 3px;"><%= f.text_field(:misc_supplies, class: 'num') %></td>
+                <td class="bl" style="padding: 0 3px;"><%= f.text_field(:misc_supplies, class: 'num part-of-total') %></td>
                 <td class="bl"></td>
                 <td class="xx-small num bl sub-cell">Labor Only</td>
               </tr>
               <tr>
                 <td class="xx-small bt sub-cell" style="padding-right: 0">Sublet Repairs</td>
-                <td class="bl bt" style="padding: 0 3px;"><%= f.text_field(:sublet_repairs, class: 'num') %></td>
+                <td class="bl bt" style="padding: 0 3px;"><%= f.text_field(:sublet_repairs, class: 'num part-of-total') %></td>
                 <td class="bl bt"></td>
                 <td class="xx-small num bl bt sub-cell">Parts</td>
               </tr>
@@ -179,13 +179,13 @@
           <td class="extra-small num full">
             <table cellpadding="0" cellspacing="0" class="plain">
               <tr>
-                <td style="padding: 0 3px;"><%= f.text_field(:labor_total, class: 'num') %></td>
+                <td style="padding: 0 3px;"><%= f.text_field(:labor_total, class: 'num part-of-total') %></td>
               </tr>
               <tr>
-                <td class="bt" style="padding: 0 3px;"><%= f.text_field(:tax_total, class: 'num') %></td>
+                <td class="bt" style="padding: 0 3px;"><%= f.text_field(:parts_total, class: 'num part-of-total') %></td>
               </tr>
               <tr>
-                <td class="bt" style="padding: 0 3px;"><%= f.text_field(:parts_total, class: 'num') %></td>
+                <td class="bt" style="padding: 0 3px;"><%= f.text_field(:tax_total, class: 'num part-of-total') %></td>
               </tr>
               <tr>
                 <td></td>
@@ -214,7 +214,7 @@
       assume for it any liability in connection with the sale of said products.
     </div>
     <div class="fr shaded bb" style="border-right: 1px solid #666;width: 80px">
-      <div class="num shaded" style="height: 42px;"></div>
+      <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, class: 'num table-input', style: 'margin-top: 8px;') %></div>
     </div>
     <div class="fr shaded" style="border: 1px solid #666; border-top: none;">
       <div class="num shaded" style="font-size: 13px;font-weight: bold; padding: 10px 3px 10px 0;width:81px;height: 22px;">Balance

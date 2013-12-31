@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230074904) do
+ActiveRecord::Schema.define(version: 20131231014440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20131230074904) do
     t.string   "paid_in_advance"
     t.float    "labor_total"
     t.float    "tax_total"
+    t.float    "balance_due"
   end
 
 end
