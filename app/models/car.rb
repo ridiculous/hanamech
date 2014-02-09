@@ -15,7 +15,7 @@ class Car < ActiveRecord::Base
   end
 
   def set_year_make_model
-    tmp_year, self.car_make, *tmp_model = year_make_model.split(/\s/)
+    tmp_year, self.car_make, *tmp_model = year_make_model.to_s.split(/\s/)
     self.year = tmp_year.try(:gsub, /[^\d]+/, '')
     self.car_model = tmp_model.join(' ')
   end

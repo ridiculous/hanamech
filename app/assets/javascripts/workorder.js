@@ -75,9 +75,14 @@ $(function () {
 
     function laborCalculator() {
         var $ph = $('#workorder_labor_total'),
-            $inputs = $('.ctable').find('.labor-total');
+            $table = $('.ctable'),
+            $inputs = $table.find('.labor-total');
 
         $inputs.on('keyup', function () {
+            $ph.val(sumTotal().toFixed(2)).trigger('change');
+        });
+
+        $table.find('.hours-total').on('keyup', function () {
             $ph.val(sumTotal().toFixed(2)).trigger('change');
         });
 
@@ -85,9 +90,12 @@ $(function () {
             var total = 0.0;
 
             for (var i = 0; i < $inputs.length; i++) {
-                var val = $inputs[i].value
-                if (val && utils.isNumeric(val)) {
-                    total += parseFloat(val);
+                var labor_val = $inputs[i].value
+                if (labor_val && utils.isNumeric(labor_val)) {
+                    var hours_val = $($inputs[i].parentElement.parentElement).find('.hours-total').val();
+                    if (hours_val && utils.isNumeric(hours_val)) {
+                        total += parseFloat(labor_val) * parseFloat(hours_val);
+                    }
                 }
             }
 

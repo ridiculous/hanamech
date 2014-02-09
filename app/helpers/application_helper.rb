@@ -33,17 +33,17 @@ module ApplicationHelper
   end
 
   def main_nav_links(in_customer_mode)
-    content_tag(:div, class: 'customer-actions'.send(:<<, in_customer_mode ? ' customer-mode' : '')) do
-      concat link_to('Home', root_path, class: "#{'active' if at? 'main'}")
-      concat link_to('Customers', customers_path, class: "#{'active' if (at? 'customers' || in_customer_mode) && controller_name != 'users'}")
+    content_tag(:div, class: "customer-actions #{customer_action_class}") do
+      concat tab_link_to('Home', root_path, at?('main'))
+      concat tab_link_to('Customers', customers_path, (at?('customers') || in_customer_mode) && controller_name != 'users')
       unless in_customer_mode
-        concat link_to('Cars', cars_path, class: "#{'active' if at? 'cars'}")
-        concat link_to('Work Orders', workorders_path, class: "#{'active' if at? 'workorders'}")
-        concat link_to('Jobs', jobs_path, class: "#{'active' if at? 'jobs'}")
-        concat link_to('Parts', parts_path, class: "#{'active' if at? 'parts'}")
+        concat tab_link_to('Cars', cars_path, at?('cars'))
+        concat tab_link_to('Work Orders', workorders_path, at?('workorders'))
+        concat tab_link_to('Jobs', jobs_path, at?('jobs'))
+        concat tab_link_to('Parts', parts_path, at?('parts'))
       end
-      concat link_to('Admin', users_path, class: "#{'active' if at? 'users'}")
-      concat link_to('Log out', logout_path, style: 'margin-right: 0;')
+      concat tab_link_to('Admin', users_path, at?('users'))
+      concat link_to('Log out', logout_path, style: 'margin-right:0')
     end
   end
 
@@ -64,5 +64,13 @@ module ApplicationHelper
 
   def at?(name='')
     controller_name == name
+  end
+
+  def tab_link_to(*args)
+    link_to(*args, class: "#{'active' if args.pop}")
+  end
+
+  def customer_action_class
+    in_customer_mode ? ' customer-mode' : ''
   end
 end

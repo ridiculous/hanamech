@@ -23,6 +23,10 @@ body, p, ol, ul, td {
     text-align: left;
 }
 
+p {
+    margin: 3px 0 4px 0;
+}
+
 input[type=submit] {
     font-size: 15px;
 }
@@ -56,11 +60,9 @@ div.field, div.actions {
 
 .field_with_errors {
     background-color: #FBF2EF;
-    display: table;
 }
 
 #error_explanation {
-    width: 450px;
     border: 1px solid #E3C700;
     padding: 7px;
     padding-bottom: 0;
@@ -83,23 +85,18 @@ div.field, div.actions {
     list-style: square;
 }
 
-.head-er {
+header {
+    padding: 5px 0;
+    margin: 0 10px;
+}
+
+.header {
     font-family: Arial, sans-serif;
     font-size: 48px;
     color: #E3C700;
-    left: 1%;
     position: relative;
-    margin-top: 15px;
-}
-
-.head-er a {
-    font-size: 18px;
-    color: #E3C700
-}
-
-.head-er a:hover {
-    color: teal;
-    background-color: #E3C700
+    margin: 15px 0 20px 0;
+    font-weight: normal;
 }
 
 .head-under {
@@ -185,7 +182,7 @@ h2 {
 }
 
 #container {
-    padding: 20px;
+    padding: 20px 0;
     background: white;
 }
 
@@ -212,6 +209,14 @@ h2 {
 
 .pt10 {
     padding-top: 10px;
+}
+
+.pl10 {
+    padding-left: 10px;
+}
+
+.pr10 {
+    padding-right: 10px;
 }
 
 .fr {
@@ -329,7 +334,6 @@ table.plain td.ra {
     line-height: 22px;
     background-repeat: repeat-x;
     background-color: #C8E7F0;
-    /*background-image: #C8E7F0;*/
     background-image: none;
     filter: none;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
@@ -347,7 +351,10 @@ table.plain td.ra {
     line-height: 22px;
     background-repeat: repeat-x;
     background-color: #E3C700;
-    /*background-image: #E3C700;*/
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
 }
 
 .customer-menu {
@@ -515,4 +522,11 @@ table td.shaded {
 .spacer {
     font-size: 16px;
     font-weight: bold
+}
+
+.box {
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 5px;
 }

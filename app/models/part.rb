@@ -4,4 +4,6 @@ class Part < ActiveRecord::Base
   has_many :workorder_parts
   has_many :workorders, through: :workorder_parts
 
+  validates :name, presence: true
+
 end

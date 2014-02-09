@@ -1,6 +1,5 @@
 class WorkordersController < ApplicationController
 
-  before_filter :set_cars, only: [:edit, :update, :new, :create]
   before_filter :set_workorder, except: :index
 
   before_filter only: [:create, :update] do
@@ -22,6 +21,21 @@ class WorkordersController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html # show
+      format.pdf do
+        @workorder.prepare
+        file_name = "#{Constants::NAME.downcase.gsub(/\W+/, '_')}_workorder_#{@workorder.id}"
+        pdf_file = Rails.root.join('private', 'workorders', "#{file_name}.pdf")
+        render :pdf => file_name,
+               :formats => [:pdf],
+               :save_to_file => pdf_file,
+               :save_only => true,
+               :page_size => "Letter"
+
+        send_file(pdf_file, :type => "application/pdf")
+      end
+    end
   end
 
   def new
@@ -38,6 +52,7 @@ class WorkordersController < ApplicationController
     if @workorder.update_attributes(params.require(:workorder).permit!)
       redirect_to(car_workorders_path(@workorder.car), notice: 'Workorder created')
     else
+      @workorder.prepare
       render(:new)
     end
   end
@@ -47,14 +62,15 @@ class WorkordersController < ApplicationController
     if @workorder.update_attributes(params.require(:workorder).permit!)
       redirect_to(edit_car_workorder_path(@workorder.car, @workorder), :notice => 'Workorder updated')
     else
-      render "edit"
+      @workorder.prepare
+      render(:edit)
     end
   end
 
   def destroy
     authorize! :destroy, @workorder
     @workorder.destroy
-    redirect_to(car_workorders_path(@car), notice: 'Work Orders has been deleted')
+    redirect_to(car_workorders_path(@car), notice: 'Work Order has been deleted')
   end
 
   def printable
@@ -63,12 +79,6 @@ class WorkordersController < ApplicationController
   end
 
   private
-
-  def set_cars
-    @cars ||= Car.includes(:customer).group('customers.id', 'cars.id').order('customers.last_name').map do |car|
-      ["#{car.customer.full_name} - #{car.car_make} #{car.car_model}", car.id]
-    end
-  end
 
   def set_workorder
     @workorder = if params[:car_id]

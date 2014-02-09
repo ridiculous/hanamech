@@ -7,10 +7,10 @@ class Workorder < ActiveRecord::Base
 
   has_one :customer, through: :car
 
-  has_many :workorder_parts
-  has_many :parts, through: :workorder_parts
-  has_many :workorder_jobs
+  has_many :workorder_parts, dependent: :destroy
+  has_many :workorder_jobs, dependent: :destroy
   has_many :jobs, through: :workorder_jobs
+  has_many :parts, through: :workorder_parts
 
   accepts_nested_attributes_for :workorder_parts, allow_destroy: true, reject_if: :incomplete_item?
   accepts_nested_attributes_for :workorder_jobs, allow_destroy: true, reject_if: :incomplete_item?
@@ -53,7 +53,7 @@ class Workorder < ActiveRecord::Base
   def incomplete_item?(obj)
     suspect = obj.each_value.detect do |val|
       if val.respond_to?(:values)
-        val.values.any?(&:blank?)
+        # val.values.any?(&:blank?)
       else
         val.blank?
       end

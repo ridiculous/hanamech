@@ -52,7 +52,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'cancan'
 gem 'newrelic_rpm'
-gem 'wicked_pdf', '~> 0.7.9'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'rails_12factor'
 
 # Use unicorn as the app server
 # gem 'unicorn'
