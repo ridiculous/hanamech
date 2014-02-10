@@ -13,6 +13,12 @@
   <p><b>Name</b></p>
   <%= @customer.name %>
 </div>
+
+<div class="box fl">
+  <p><b>Address</b></p>
+  <%= @customer.street.present? ? "#{@customer.street} <br />".html_safe : '' %>
+  <%= @customer.city_state %>
+</div>
 <div class="box fl">
   <p><b>Phone number</b></p>
   <%= @customer.phone_number %>

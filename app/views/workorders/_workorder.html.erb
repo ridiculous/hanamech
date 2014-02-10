@@ -167,19 +167,19 @@
             <td class="extra-small num full">
                 <table cellpadding="0" cellspacing="0" class="plain">
                     <tr>
-                        <td style="padding: 0 3px;"><%= f.text_field(:labor_total, class: 'num part-of-total') %></td>
+                        <td style="padding: 0 3px;"><%= f.text_field(:labor_total, value: '%.2f' % @workorder.labor_total.to_f, class: 'num part-of-total') %></td>
                     </tr>
                     <tr>
-                        <td class="bt" style="padding: 0 3px;"><%= f.text_field(:parts_total, class: 'num part-of-total') %></td>
+                        <td class="bt" style="padding: 0 3px;"><%= f.text_field(:parts_total, value: '%.2f' % @workorder.parts_total.to_f, class: 'num part-of-total') %></td>
                     </tr>
                     <tr>
-                        <td class="bt" style="padding: 0 3px;"><%= f.text_field(:tax_total, class: 'num part-of-total') %></td>
+                        <td class="bt" style="padding: 0 3px;"><%= f.text_field(:tax_total, value: '%.2f' % @workorder.tax_total.to_f, class: 'num part-of-total') %></td>
                     </tr>
                     <tr>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="bt" style="padding: 0 3px;font-size: 18px;height: 41px"><%= f.text_field(:total, class: 'num') %></td>
+                        <td class="bt" style="padding: 0 3px;font-size: 18px;height: 41px"><%= f.text_field(:total, value: '%.2f' % @workorder.total.to_f, class: 'num') %></td>
                     </tr>
                 </table>
             </td>
@@ -202,7 +202,7 @@
     assume for it any liability in connection with the sale of said products.
 </div>
 <div class="fr shaded bb" style="border-right: 1px solid #666;width: 80px">
-    <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, class: 'num table-input', style: 'margin-top: 8px;') %></div>
+    <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, value: '%.2f' % @workorder.balance_due.to_f, class: 'num table-input', style: 'margin-top: 8px;') %></div>
 </div>
 <div class="fr shaded" style="border: 1px solid #666; border-top: none;">
     <div class="num shaded" style="font-size: 13px;font-weight: bold; padding: 10px 3px 10px 0;width:81px;height: 22px;">Balance

@@ -51,22 +51,72 @@ class Workorder < ActiveRecord::Base
   end
 
   def incomplete_item?(obj)
-    suspect = obj.each_value.detect do |val|
-      if val.respond_to?(:values)
-        # val.values.any?(&:blank?)
-      else
-        val.blank?
-      end
-    end
+    suspect = obj.each_value.detect { |val| val.blank? unless val.respond_to?(:values) }
     if suspect && obj.has_key?(:id)
-      !(obj[:_destroy] = true)
+      !(obj[:_destroy] = true) # false
     else
       suspect
     end
   end
 
   def copy_odometer_to_car
-    car.odometer = odometer if odometer.to_i > car.try(:odometer).to_i
+    car.odometer = odometer if car && odometer.to_i > car.try(:odometer).to_i
+  end
+
+  def convert_to_v2
+    destroy && return if car.nil?
+    do_parts if workorder_parts.empty?
+    do_jobs if workorder_jobs.empty?
+    self.tax_total = tax.to_f
+    self.labor_total = labor.to_f
+    self.paid_in_advance = 0.0
+    self.balance_due = total.to_f
+    save!
+  end
+
+  def do_parts
+    wo_mats = materials.split(/,\s|\r\n/) # comma or carriage return and new line
+    len = wo_mats.length
+    wo_mats.each do |mats|
+      build_workorder_parts(mats, len)
+    end
+  end
+
+  def do_jobs
+    wo_details = details.split(/,\s|\r\n/) # comma or carriage return and new line
+    len = wo_details.length
+    wo_details.each do |dets|
+      build_workorder_jobs(dets, len)
+    end
+  end
+
+  def build_workorder_parts(mats, len)
+    qt = get_quantity(mats)
+    price = len == 1 ? parts_total : 0.0
+    part = Part.find_or_initialize_by(name: mats.sub(Regexp.new("#{qt} "), ''))
+    unless part.persisted?
+      part.price = price
+      part.save
+    end
+    workorder_parts.create(part: part, quantity: qt, price: price)
+  end
+
+  def build_workorder_jobs(dets, len)
+    price = len == 1 ? labor : 0.0
+    job = Job.find_or_initialize_by(name: dets)
+    unless job.persisted?
+      job.hours = 1
+      job.save
+    end
+    workorder_jobs.create(job: job, total: price, hours: 1)
+  end
+
+  def get_quantity(mats)
+    if mats =~ /^(\d{1})\s/ # single digit = quantity
+      $1
+    else
+      '1'
+    end
   end
 end
 

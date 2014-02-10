@@ -25,6 +25,10 @@ class Customer < ActiveRecord::Base
      self.name = "#{first_name} #{last_name}"
   end
 
+  def address
+    "#{street}, #{city_state}"
+  end
+
   class << self
 
     def searchable_fields
