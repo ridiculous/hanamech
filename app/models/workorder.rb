@@ -105,6 +105,7 @@ class Workorder < ActiveRecord::Base
 
   def build_workorder_jobs(dets, len)
     price = len == 1 ? labor : 0.0
+    return unless dets.present?
     job = Job.find_or_initialize_by(name: dets)
     unless job.persisted?
       job.hours = 1
