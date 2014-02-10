@@ -93,7 +93,9 @@ class Workorder < ActiveRecord::Base
   def build_workorder_parts(mats, len)
     qt = get_quantity(mats)
     price = len == 1 ? parts_total : 0.0
-    part = Part.find_or_initialize_by(name: mats.sub(Regexp.new("#{qt} "), ''))
+    name =  mats.sub(Regexp.new("#{qt} "), '')
+    return unless name.present?
+    part = Part.find_or_initialize_by(name: name)
     unless part.persisted?
       part.price = price
       part.save
