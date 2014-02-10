@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.order('id DESC').page(params[:page]).per_page(Constants::PER_PAGE)
+    @jobs = Job.order("#{lowered_column} #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
   end
 
   # GET /jobs/1
@@ -62,13 +62,17 @@ class JobsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_job
-      @job = Job.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_job
+    @job = Job.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def job_params
-      params[:job]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def job_params
+    params[:job]
+  end
+
+  def sort_column
+    super('name')
+  end
 end

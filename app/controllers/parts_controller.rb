@@ -4,7 +4,7 @@ class PartsController < ApplicationController
   # GET /parts
   # GET /parts.json
   def index
-    @parts = Part.order('id DESC').page(params[:page]).per_page(Constants::PER_PAGE)
+    @parts = Part.order("#{lowered_column} #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
   end
 
   # GET /parts/1
@@ -62,13 +62,17 @@ class PartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_part
-      @part = Part.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_part
+    @part = Part.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def part_params
-      params[:part]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def part_params
+    params[:part]
+  end
+
+  def sort_column
+    super('name')
+  end
 end

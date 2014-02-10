@@ -30,7 +30,7 @@
                         Date
                     </div>
                     <div class="fl" style="width: 75%">
-                        <%= f.text_field(:date, class: 'num date-field') %>
+                        <%= f.text_field(:date, value: @workorder.date.strftime('%m/%d/%Y'), class: 'num date-field') %>
                     </div>
                 </td>
             </tr>

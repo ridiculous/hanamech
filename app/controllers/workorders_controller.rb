@@ -22,7 +22,7 @@ class WorkordersController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html # show
+      format.html
       format.pdf do
         @workorder.prepare
         file_name = "#{Constants::NAME.downcase.gsub(/\W+/, '_')}_workorder_#{@workorder.id}"
@@ -33,7 +33,7 @@ class WorkordersController < ApplicationController
                :save_only => true,
                :page_size => "Letter"
 
-        send_file(pdf_file, :type => "application/pdf")
+        send_file(pdf_file, type: 'application/pdf')
       end
     end
   end
@@ -60,7 +60,7 @@ class WorkordersController < ApplicationController
   def update
     authorize! :update, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(edit_car_workorder_path(@workorder.car, @workorder), :notice => 'Workorder updated')
+      redirect_to(edit_car_workorder_path(@workorder.car, @workorder), :notice => "Workorder updated. #{view_context.link_to('Back to workorders', view_context.my_wos_path)}")
     else
       @workorder.prepare
       render(:edit)

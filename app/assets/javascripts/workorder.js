@@ -16,6 +16,7 @@ $(function () {
     laborCalculator();
     totalCalculator();
     bindArrowKeys();
+    $('#workorder_date').datepicker();
 
     function totalCalculator() {
         var $ph = $('#workorder_total')

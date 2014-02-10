@@ -11,6 +11,7 @@
 <div class="landscape-page">
   <%= form_for([@car, @workorder]) do |f| %>
       <%= render partial: 'workorder', locals: {f: f} %>
+
       <div class="fr pt10"><%= f.submit %></div>
       <div class="reset"></div>
   <% end %>

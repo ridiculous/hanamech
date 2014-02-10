@@ -43,6 +43,15 @@ class ApplicationController < ActionController::Base
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
+  def lowered_column
+    col = sort_column
+    if col == 'name'
+      'LOWER(name)'
+    else
+      col
+    end
+  end
+
   protected
 
   def authenticate_user
