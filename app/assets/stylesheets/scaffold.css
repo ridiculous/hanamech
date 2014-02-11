@@ -1,0 +1,519 @@
+body {
+    background-image: url('carbon_fibre.png');
+    background-repeat: repeat;
+    color: #333;
+}
+
+body, p, ol, ul, td {
+    font-family: "Helvetica Neue", arial, helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: left;
+}
+
+p {
+    margin: 3px 0 4px 0;
+}
+
+input[type=submit] {
+    font-size: 15px;
+}
+
+pre {
+    background-color: #eee;
+    padding: 10px;
+    font-size: 11px;
+}
+
+a {
+    font-size: 15px;
+    text-decoration: none;
+    padding: 3px 5px;
+    border-radius: 3px;
+    color: #005AB3;
+}
+
+a:visited {
+    color: #005AB3;
+}
+
+a:hover {
+    color: #FFF;
+    background-color: #005AB3
+}
+
+div.field, div.actions {
+    margin-bottom: 10px;
+}
+
+.field_with_errors {
+    background-color: #FBF2EF;
+}
+
+#error_explanation {
+    border: 1px solid #E3C700;
+    padding: 7px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0;
+    background-color: #E3C700;
+}
+
+#error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+}
+
+header {
+    padding: 5px 0;
+    margin: 0 10px;
+}
+
+.header {
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    color: #E3C700;
+    position: relative;
+    margin: 15px 0 20px 0;
+    font-weight: normal;
+}
+
+.head-under {
+    color: #000;
+    position: relative;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #104D71;
+}
+
+.mouseOv {
+    text-decoration: underline;
+    color: #104D71
+}
+
+.mouseOut {
+    text-decoration: none;
+    color: black;
+}
+
+.noneyet {
+    font-size: 15px;
+    color: #003163
+}
+
+.wo-header {
+    color: #104D71;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0.67em 0;
+}
+
+.nice {
+    width: 100%;
+}
+
+.nice td {
+    font-size: 16px;
+}
+
+.nice th .current {
+    padding-right: 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.nice th {
+    background-color: #FFF;
+    font-size: 15px;
+    color: #003163;
+    margin: 1px;
+    border-bottom: 2px solid #ddd;
+}
+
+.nice th .asc {
+    background-image: url('down-triangle.gif');
+}
+
+.nice th .desc {
+    background-image: none;
+}
+
+.nice tr:nth-child(odd) > td {
+    background-color: #f9f9f9;
+}
+
+body #container .nice tr:hover > td {
+    background-color: #FFF1CE !important;
+}
+
+#out {
+    margin: 5px 10px 15px 15px
+}
+
+#container {
+    padding: 20px 0;
+    background: white;
+}
+
+.reset {
+    clear: both;
+}
+
+.chah {
+    font-size: 15px;
+}
+
+.pad {
+    padding: 10px;
+    padding-left: 2px;
+}
+
+.pb10 {
+    padding-bottom: 10px;
+}
+
+.pt5 {
+    padding-top: 5px;
+}
+
+.pt10 {
+    padding-top: 10px;
+}
+
+.pl10 {
+    padding-left: 10px;
+}
+
+.pr10 {
+    padding-right: 10px;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.c {
+    clear: both;
+}
+
+.ul {
+    margin-top: 1px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mt-20 {
+    margin-top: -20px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+table td,
+table th {
+    text-align: left;
+}
+
+table th small {
+    font-weight: normal;
+}
+
+div #out .customer-actions a,
+div #out .customer-actions a.customer-actions a:visited {
+    text-decoration: none;
+}
+
+.customer-actions a {
+    color: #FFF;
+    margin-left: 10px;
+    padding: 4px 12px;
+    border: 1px transparent solid;
+    border-bottom: none;
+}
+
+.customer-actions a:hover,
+.customer-actions a.active {
+    background: #FFF;
+    border: 1px solid graytext;
+    border-bottom: none;
+    color: #000;
+}
+
+.customer-mode.customer-actions a:hover,
+.customer-mode.customer-actions a.active {
+    background: #E3C700;
+    border: 1px solid graytext;
+    border-bottom: none;
+    color: #000;
+}
+
+.customer-menu .customer-actions a {
+    color: #000;
+    margin-left: 0;
+}
+
+a img {
+    border: none;
+    outline: none;
+}
+
+table.plain {
+    width: 100%;
+    border: none;
+}
+
+table.plain th,
+table.plain td {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+table.plain td.ra {
+    text-align: right;
+}
+
+.pagination .current {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 3px 5px;
+}
+
+.customer-menu,
+.alert {
+    clear: both;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #000;
+    line-height: 22px;
+    background-repeat: repeat-x;
+    background-color: #E3C700;
+    background-image: none;
+    filter: none;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 6px 9px;
+}
+
+.alert {
+    border: 1px solid #D8BF00;
+    line-height: 22px;
+    background-repeat: repeat-x;
+    background-color: #FFF;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    color: #000;
+    text-shadow: none;
+    font-size: 16px;
+}
+
+.customer-menu {
+    padding-bottom: 0;
+    -moz-border-bottom-left-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -moz-border-bottom-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.total-row td {
+    border-top: 1px solid #CCC;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 200px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 15px;
+}
+
+/* Workorders */
+
+.landscape-page {
+    width: 792px; /* 11 inches */
+    height: 760px; /* 8.5 inches */
+    overflow: hidden;
+    margin: auto;
+    background-color: #FFF;
+    font-size: 13px;
+}
+
+.parts-section {
+    width: 50%;
+}
+
+.job-section {
+    width: 50%;
+}
+
+.btable,
+.ctable {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    border-top: 1px solid #666;
+    border-left: 1px solid #666;
+}
+
+.ctable th {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+.sub-cell,
+table tr td .sub-cell,
+.ctable td {
+    padding: 0 3px;
+}
+
+.ctable td.full {
+    padding: 0;
+}
+
+.ctable th,
+.ctable td,
+.btable td {
+    font-family: monospace;
+    border-bottom: 1px solid #666;
+    border-right: 1px solid #666;
+}
+
+.ctable tr td input[type=text] {
+    height: 17px;
+}
+
+.btable tr td input[type=text] {
+    height: 26px;
+}
+
+div .table-input,
+.ctable tr td input[type=text],
+.btable td input[type=text] {
+    width: 100%;
+    margin: 0;
+    padding: 1px;
+    font-size: 12px;
+    border: none !important;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0);
+}
+
+div .table-input:focus,
+.btable tr td input,
+.ctable tr td input:focus {
+    outline: none;
+}
+
+.num {
+    text-align: right;
+}
+
+.extra-small {
+    font-size: 12px;
+}
+
+.xx-small {
+    font-size: 11px;
+}
+
+.xxx-small {
+    font-size: 10px;
+    line-height: 11px;
+}
+
+.center {
+    text-align: center;
+}
+
+.company-name {
+    margin-top: 0 !important;
+}
+
+.wo-title {
+    font-family: 'Times New Roman', "Josefin Sans", monospace;
+    font-size: 30px;
+    margin-top: 5px;
+    padding-bottom: 10px;
+}
+
+.btable tr td {
+    padding: 0 2px;
+    font-size: 14px;
+}
+
+.bl,
+table td.bl {
+    border-left: 1px solid #666
+}
+
+.bt,
+table td.bt {
+    border-top: 1px solid #666
+}
+
+.bb {
+    border-bottom: 1px solid #666;
+}
+
+.shaded,
+table td.shaded {
+    background: #EEE;
+}
+
+.spacer {
+    font-size: 16px;
+    font-weight: bold
+}
+
+.box {
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 2px 1px;
+}

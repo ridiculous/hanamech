@@ -17,6 +17,17 @@ $(function () {
     totalCalculator();
     bindArrowKeys();
     $('#workorder_date').datepicker();
+    $('.part-name').autocomplete({
+        source: BOOTSTRAP.part_names
+    });
+
+    $('.job-name').autocomplete({
+        source: BOOTSTRAP.job_names
+    });
+
+    $('.customer-name').autocomplete({
+        source: BOOTSTRAP.customer_names
+    });
 
     function totalCalculator() {
         var $ph = $('#workorder_total')

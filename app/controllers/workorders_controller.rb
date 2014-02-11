@@ -1,6 +1,7 @@
 class WorkordersController < ApplicationController
 
   before_filter :set_workorder, except: :index
+  before_filter :bootsrap_data, only: [:new, :edit, :update, :create]
 
   before_filter only: [:create, :update] do
     wo = params[:workorder]
@@ -89,6 +90,16 @@ class WorkordersController < ApplicationController
     @car = @workorder.car
     @customer = @car.customer if @car
     @workorder.odometer ||= @car.try(:odometer)
+  end
+
+  def bootsrap_data
+    @part_names = select_name_from('parts')
+    @customer_names = select_name_from('customers')
+    @job_names = select_name_from('jobs')
+  end
+
+  def select_name_from(table_name)
+    ActiveRecord::Base.connection.select_all("SELECT name FROM #{table_name}").map { |x| x['name'] }
   end
 
   def access_denied

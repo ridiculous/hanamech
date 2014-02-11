@@ -22,7 +22,7 @@
                         Name
                     </div>
                     <div class="fl" style="width: 87%">
-                        <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:name, class: 'center') } } %>
+                        <%= f.fields_for(:car) { |cf| cf.fields_for(:customer) { |ccf| ccf.text_field(:name, class: 'center customer-name') } } %>
                     </div>
                 </td>
                 <td>
@@ -76,7 +76,7 @@
         <%= f.fields_for(:workorder_parts) do |wo_part| %>
         <tr>
             <td width="20%"><%= wo_part.text_field(:quantity, class: 'num part-quantity') %></td>
-            <td width="59%"><%= wo_part.fields_for(:part) { |part| part.text_field(:name) } %></td>
+            <td width="59%"><%= wo_part.fields_for(:part) { |part| part.text_field(:name, class: 'part-name') } %></td>
             <td width="20%"><%= wo_part.text_field(:price, class: 'num part-price') %></td>
         </tr>
         <% end %>
@@ -125,7 +125,7 @@
         <%= f.fields_for(:workorder_jobs) do |woj| %>
         <tr>
             <td width="20%"><%= woj.text_field(:hours, class: 'num hours-total') %></td>
-            <td width="59%"><%= woj.fields_for(:job) { |jf| jf.text_field(:name) } %></td>
+            <td width="59%"><%= woj.fields_for(:job) { |jf| jf.text_field(:name, class: 'job-name') } %></td>
             <td width="20%"><%= woj.text_field(:total, class: 'num labor-total') %></td>
         </tr>
         <% end %>

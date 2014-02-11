@@ -44,4 +44,12 @@ module WorkordersHelper
     end
   end
 
+  def bootsrap_data
+    {
+        part_names: @part_names,
+        customer_names: @customer_names,
+        job_names: @job_names
+    }
+  end
+
 end
