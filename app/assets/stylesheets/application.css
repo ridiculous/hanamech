@@ -101,7 +101,7 @@ header {
 }
 
 .head-under {
-    color: #104D71;
+    color: #000;
     position: relative;
     font-size: 30px;
     font-weight: bold;
@@ -110,16 +110,6 @@ header {
 
 h2 {
     color: #104D71;
-}
-
-.categories {
-    color: #104D71;
-    font-size: 18px
-}
-
-.c {
-    color: #104D71;
-    font-size: 14px
 }
 
 .mouseOv {
