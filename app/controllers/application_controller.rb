@@ -3,9 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to(logout_path)
-  end
+  rescue_from CanCan::AccessDenied, with: :access_denied
 
   helper_method :set_customer_mode, :in_customer_mode, :current_user, :sort_column, :sort_direction
   hide_action :set_customer_mode, :in_customer_mode
@@ -58,6 +56,10 @@ class ApplicationController < ActionController::Base
     if !session || !current_user
       redirect_to(login_path, alert: 'Please sign in first') and return
     end
+  end
+
+  def access_denied(exception)
+    redirect_to(logout_path)
   end
 
   private

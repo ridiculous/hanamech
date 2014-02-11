@@ -7,8 +7,6 @@ class Customer < ActiveRecord::Base
   has_many :workorders, through: :cars
   validates :name, presence: true
 
-  before_validation :set_first_last_name
-
   def full_name
     "#{last_name}, #{first_name}"
   end
@@ -17,12 +15,8 @@ class Customer < ActiveRecord::Base
     first_name
   end
 
-  def set_first_last_name
-    self.first_name, self.last_name = name.split(' ')
-  end
-
   def set_name
-     self.name = "#{first_name} #{last_name}"
+     self.name = "#{first_name} #{last_name}".strip
   end
 
   def address

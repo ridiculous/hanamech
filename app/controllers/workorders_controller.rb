@@ -7,7 +7,6 @@ class WorkordersController < ApplicationController
     wo[:date].try(:gsub!, %r{(\d{2})/(\d{2})/(\d+)}, '\3-\1-\2')
   end
 
-
   def index
     @car = Car.find_by_id(params[:car_id])
     @workorders = if @car
@@ -31,7 +30,8 @@ class WorkordersController < ApplicationController
                :formats => [:pdf],
                :save_to_file => pdf_file,
                :save_only => true,
-               :page_size => "Letter"
+               :orientation => 'Landscape',
+               page_size: 'Letter'
 
         send_file(pdf_file, type: 'application/pdf')
       end
@@ -89,6 +89,10 @@ class WorkordersController < ApplicationController
     @car = @workorder.car
     @customer = @car.customer if @car
     @workorder.odometer ||= @car.try(:odometer)
+  end
+
+  def access_denied
+    redirect_to(car_workorders_path(@car), alert: 'You are not authorized to update workorders')
   end
 
 end

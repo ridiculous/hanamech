@@ -160,10 +160,11 @@ h2 {
 }
 
 .nice th {
-    background-color: #CCCCCC;
+    background-color: #FFF;
     font-size: 15px;
     color: #003163;
     margin: 1px;
+    border-bottom: 2px solid #ddd;
 }
 
 .nice th .asc {
@@ -174,8 +175,12 @@ h2 {
     background-image: none;
 }
 
-.nice tr:hover {
-    background-color: #E6E6FA;
+.nice tr:nth-child(odd) > td {
+    background-color: #f9f9f9;
+}
+
+body #container .nice tr:hover > td {
+    background-color: #FFF1CE !important;
 }
 
 #out {
@@ -533,6 +538,7 @@ table td.shaded {
     border-radius: 4px;
     margin: 5px;
     padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 2px 1px;
 }
 
 /*!

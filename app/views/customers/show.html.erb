@@ -19,14 +19,17 @@
   <%= @customer.street.present? ? "#{@customer.street} <br />".html_safe : '' %>
   <%= @customer.city_state %>
 </div>
+
 <div class="box fl">
   <p><b>Phone number</b></p>
   <%= @customer.phone_number %>
 </div>
+
 <div class="box fl">
   <p><b>Cell number</b></p>
   <%= @customer.cell_number %>
 </div>
+
 <div class="box fl">
   <p><b>Email</b></p>
   <%= @customer.email %>

@@ -15,11 +15,11 @@
       </tr>
       <% @workorders.each do |workorder| %>
           <tr>
-            <td><%= link_to workorder.date, edit_my_wo_path(workorder) if can?(:update, workorder) %></td>
+            <td><%= link_to workorder.date, edit_my_wo_path(workorder) %></td>
             <td><%= workorder.customer.try(:name) || '[None]' %></td>
             <td><%= workorder.jobs.map(&:name).join(', ') %></td>
             <td><%= "$#{workorder.total.to_f}" %></td>
-            <td><%= link_to 'Edit', edit_my_wo_path(workorder) if can?(:update, workorder) %></td>
+            <td><%= link_to((current_user.luna? ? 'Edit' : 'View'), edit_my_wo_path(workorder)) %></td>
             <td><%= link_to 'PDF', workorder_path(workorder, format: :pdf) %></td>
             <td>
               <% if can?(:destroy, workorder) %>
@@ -35,7 +35,6 @@
             <td></td>
             <td>Total</td>
             <td><%= "$#{@total.round(2)}" %></td>
-            <td></td>
             <td></td>
             <td></td>
           </tr>

@@ -54,7 +54,10 @@ gem 'cancan'
 gem 'newrelic_rpm'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'rails_12factor'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
 
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
 
   def customers
     luna? ? Customer.all : Customer.where(id: customer_id)

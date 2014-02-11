@@ -6,7 +6,7 @@
 </head>
 <body style="background: #FFF;padding: 0;margin: 0;">
 <div>
-  <div class="landscape-page">
+  <div class="landscape-page" style="overflow: hidden;height: 720px;">
     <%= form_for([@car, @workorder]) do |f| %>
         <%= render partial: 'workorder', formats: [:html], locals: {f: f} %>
         <div class="reset"></div>
