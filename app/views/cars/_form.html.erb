@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= f.label :customer_id %><br/>
-    <%= f.select(:customer_id, Customer.all.map{ |custmr| [custmr.full_name, custmr.id]}, prompt: '------ CUSTOMER SELECTION ------' )  %>
+    <%= f.select(:customer_id, Customer.all.map{ |custmr| [custmr.name, custmr.id]}, prompt: '------ CUSTOMER SELECTION ------' )  %>
   </div>
   <div class="field">
     <%= f.label :year_make_model, 'Year<span class="spacer">&sdot;</span>Make<span class="spacer">&sdot;</span>Model'.html_safe %><br />

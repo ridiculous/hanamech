@@ -30,7 +30,7 @@
       </tr>
       <% @selected_customers.each do |customer|  %>
           <tr>
-            <td><%= link_to(customer.first_name+' '+customer.last_name, edit_customer_path(customer)) %></td>
+            <td><%= link_to(customer.name, edit_customer_path(customer)) %></td>
             <td><%= customer.phone_number %></td>
             <td><%= customer.email %></td>
             <td><%= customer.cell_number %></td>
