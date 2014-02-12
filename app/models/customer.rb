@@ -16,7 +16,7 @@ class Customer < ActiveRecord::Base
   end
 
   def set_name
-     self.name = "#{first_name} #{last_name}".strip
+    self.name = "#{first_name} #{last_name}".strip
   end
 
   def address
@@ -45,12 +45,7 @@ class Customer < ActiveRecord::Base
       users_search = params[:users_search].strip
       case params[:cat]
         when 'name' then
-          first_name, last_name = users_search.split(/\s/)
-          if last_name
-            return "first_name ilike ? and last_name ilike ?", '%'+first_name.strip+'%', '%'+last_name.strip+'%'
-          else
-            return "first_name ilike ? or last_name ilike ?", '%'+users_search+'%', '%'+users_search+'%'
-          end
+          return "name ilike ?", "%#{users_search}%"
         when 'phone' then
           return "phone_number ilike :q or cell_number ilike :q", q: '%' + users_search + '%'
         when 'car' then
@@ -58,6 +53,17 @@ class Customer < ActiveRecord::Base
         else
           return "email ilike ?", '%' + users_search + '%'
       end
+    end
+
+    def all_as_json
+      ActiveRecord::Base.connection.select_all("SELECT name, phone_number, street, city_state FROM customers").map { |customer|
+        {
+            name: customer['name'],
+            phone: customer['phone_number'],
+            street: customer['street'],
+            city_state: customer['city_state']
+        }
+      }
     end
   end
 end

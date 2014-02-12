@@ -47,7 +47,6 @@ module WorkordersHelper
   def bootsrap_data
     {
         part_names: @part_names,
-        customer_names: @customer_names,
         job_names: @job_names
     }
   end

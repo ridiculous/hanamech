@@ -8,7 +8,7 @@ class MainController < ApplicationController
       @selected_customers = []
       if params[:users_search].present?
         @selected_customers = Customer.includes(:cars).search(params) \
-      .order(:last_name, 'cars.car_make').page(params[:page]).per_page(Constants::PER_PAGE)
+              .order(:last_name, 'cars.car_make').page(params[:page]).per_page(Constants::PER_PAGE)
       end
     else
       redirect_to customer_path(current_user.customer)

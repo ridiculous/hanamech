@@ -4,12 +4,19 @@ class CustomersController < ApplicationController
 
   def index
     if current_user.luna?
-      @customers = if params[:id]
-                     Customer.where("id = ?", params[:id])
-                   else
-                     Customer.all
-                   end
-      @customers = @customers.order("LOWER(#{sort_column}) #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+      respond_to do |format|
+        format.html do
+          @customers = if params[:id]
+                         Customer.where("id = ?", params[:id])
+                       else
+                         Customer.all
+                       end
+          @customers = @customers.order("LOWER(#{sort_column}) #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+        end
+        format.json do
+          render json: Customer.all_as_json
+        end
+      end
     else
       redirect_to(customer_path(current_user.customer))
     end
@@ -28,7 +35,7 @@ class CustomersController < ApplicationController
   def create
     authorize! :create, @customer = Customer.new(params.require(:customer).permit!)
     if @customer.save
-      redirect_to(@customer, :notice => 'Customer successfully created')
+      redirect_to(customer_path(@customer, clear: 'customers'), :notice => 'Customer successfully created')
     else
       render "new"
     end
@@ -37,7 +44,7 @@ class CustomersController < ApplicationController
   def update
     authorize! :update, @customer
     if @customer.update_attributes(params.require(:customer).permit!)
-      redirect_to(customer_path(@customer), :notice => 'Record updated')
+      redirect_to(customer_path(@customer, clear: 'customers'), :notice => 'Record updated')
     else
       render :edit
     end

@@ -94,7 +94,6 @@ class WorkordersController < ApplicationController
 
   def bootsrap_data
     @part_names = select_name_from('parts')
-    @customer_names = select_name_from('customers')
     @job_names = select_name_from('jobs')
   end
 
