@@ -371,7 +371,7 @@ input[type=password] {
 /* Workorders */
 
 .landscape-page {
-    width: 792px; /* 11 inches */
+    width: 1080px; /* 11 inches */
     height: 760px; /* 8.5 inches */
     overflow: hidden;
     margin: auto;
