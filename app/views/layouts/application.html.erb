@@ -42,7 +42,7 @@
 </div>
 <% if params[:clear].present? %>
     <script>
-        Site.Cache.clear('<%= params[:clear].strip %>');
+        Site.cache.clear('<%= params[:clear].strip %>');
     </script>
 <% end %>
 </body>

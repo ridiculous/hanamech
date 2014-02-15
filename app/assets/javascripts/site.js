@@ -1,5 +1,5 @@
 var Site = {
-    Cache: {
+    cache: {
         getStorage: function () {
             if (typeof localStorage == 'object') {
                 return localStorage;

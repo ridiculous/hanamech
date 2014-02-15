@@ -25,11 +25,11 @@ $(function () {
 
     $('.customer-name').one('click', function () {
         var name = this;
-        if (Site.Cache.customersLoaded()) {
-            bindAutocomplete(name, Site.Cache.getCustomers());
+        if (Site.cache.customersLoaded()) {
+            bindAutocomplete(name, Site.cache.getCustomers());
         } else {
             $.getJSON('/customers', function (data) {
-                Site.Cache.save('customers', data);
+                Site.cache.save('customers', data);
                 bindAutocomplete(name, data)
             })
         }
@@ -39,7 +39,22 @@ $(function () {
         $(field).autocomplete({
             source: data.map(function (item) {
                 return item.name
-            })
+            }),
+            select: function(e, obj) {
+              var customer = Site.cache.getCustomers().findObject(obj.item.value, 'name');
+
+              if(customer.street) {
+                document.getElementById('customer_street').value = customer.street;
+              }
+
+              if(customer.city_state) {
+                document.getElementById('customer_city_state').value = customer.city_state;
+              }
+
+              if(customer.phone) {
+                document.getElementById('customer_phone').value = customer.phone;
+              }
+            }
         });
     }
 

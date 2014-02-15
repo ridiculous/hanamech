@@ -27,9 +27,15 @@
       <%= f.text_field :email %>
     </div>
     <div class="field">
-      <%= f.label :cell_number %>
+      <%= f.label :street %>
       <br/>
-      <%= f.text_field :cell_number %>
+      <%= f.text_field :street %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city_state, 'City, State' %>
+      <br/>
+      <%= f.text_field :city_state %>
     </div>
     <div class="actions">
       <%= f.submit %>
