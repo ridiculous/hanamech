@@ -7,11 +7,12 @@ class CarsController < ApplicationController
     if @customer
       @cars = @customer.cars
     elsif current_user.luna?
-      @cars = Car.includes(:customer)
+      @cars = Car.where(nil)
     else
       redirect_to(logout_path) and return
     end
-    @cars = @cars.order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(Constants::PER_PAGE)
+    @cars = @cars.includes(:customer) \
+            .order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(Constants::PER_PAGE)
   end
 
   def show

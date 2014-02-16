@@ -8,6 +8,8 @@ class Car < ActiveRecord::Base
 
   after_validation :set_year_make_model
 
+  attr_accessor :workorder_count
+
   def name
     wip = "#{car_make} #{car_model}"
     wip.prepend("#{year} ") if year.present?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231014440) do
+ActiveRecord::Schema.define(version: 20140216065335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20131231014440) do
     t.string   "year_make_model"
     t.integer  "odometer"
   end
+
+  add_index "cars", ["customer_id"], name: "index_cars_on_customer_id", using: :btree
 
   create_table "customers", force: true do |t|
     t.string   "first_name"
@@ -104,5 +106,7 @@ ActiveRecord::Schema.define(version: 20131231014440) do
     t.float    "tax_total"
     t.float    "balance_due"
   end
+
+  add_index "workorders", ["car_id"], name: "index_workorders_on_car_id", using: :btree
 
 end

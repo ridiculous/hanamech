@@ -25,6 +25,7 @@ class PartsController < ApplicationController
   # POST /parts.json
   def create
     @part = Part.new(part_params)
+    authorize! :create, @part
 
     respond_to do |format|
       if @part.save
@@ -40,6 +41,7 @@ class PartsController < ApplicationController
   # PATCH/PUT /parts/1
   # PATCH/PUT /parts/1.json
   def update
+    authorize! :update, @part
     respond_to do |format|
       if @part.update(part_params)
         format.html { redirect_to @part, notice: 'Part was successfully updated.' }
@@ -54,10 +56,11 @@ class PartsController < ApplicationController
   # DELETE /parts/1
   # DELETE /parts/1.json
   def destroy
-    @part.destroy
-    respond_to do |format|
-      format.html { redirect_to parts_url }
-      format.json { head :no_content }
+    authorize! :destroy, @part
+    if @part.destroy
+      redirect_to parts_path, notice: 'Part deleted'
+    else
+      redirect_to part_path(@part), alert: "Part cannot be deleted because it's used by a workorder"
     end
   end
 
@@ -69,7 +72,7 @@ class PartsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def part_params
-    params[:part]
+    params[:part].permit(:name, :price)
   end
 
   def sort_column

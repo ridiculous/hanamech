@@ -1,17 +1,21 @@
 <%= form_for(@part) do |f| %>
-  <% if @part.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@part.errors.count, "error") %> prohibited this part from being saved:</h2>
+    <%= errors_for(@part) %>
 
-      <ul>
-      <% @part.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :price %>
+      <br/>
+      <%= f.text_field :price %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <div class="pt10">
+      Please note the name of this part will be updated on any workorders using it
+    </div>
 <% end %>

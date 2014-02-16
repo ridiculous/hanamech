@@ -25,6 +25,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(job_params)
+    authorize! :create, @job
 
     respond_to do |format|
       if @job.save
@@ -40,6 +41,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    authorize! :update, @job
     respond_to do |format|
       if @job.update(job_params)
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
@@ -54,6 +56,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    authorize! :destroy, @job
     if @job.destroy
       redirect_to jobs_path, notice: 'Job deleted'
     else

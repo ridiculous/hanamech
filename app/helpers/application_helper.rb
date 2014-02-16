@@ -73,4 +73,18 @@ module ApplicationHelper
   def customer_action_class
     in_customer_mode ? ' customer-mode' : ''
   end
+
+  def errors_for(record)
+    if record.errors.any?
+      content_tag(:div, id: 'error_explanation') do
+        content_tag(:h2) do
+          "#{pluralize(record.errors.count, 'error')} prohibited this record from being saved"
+        end + content_tag(:ul) do
+          record.errors.full_messages.each do |msg|
+            concat content_tag(:li, msg)
+          end
+        end
+      end
+    end
+  end
 end

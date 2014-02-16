@@ -15,9 +15,10 @@ class WorkordersController < ApplicationController
                     @total = @car.workorders.map(&:real_total).reduce(:+)
                     @car.workorders
                   else
-                    Workorder.includes(:car)
+                    Workorder.where(nil)
                   end
-    @workorders = @workorders.order('date DESC, car_id').page(params[:page]).per_page(Constants::PER_PAGE)
+    @workorders = @workorders.includes(:car, :customer, :jobs) \
+                  .order('date DESC, car_id').page(params[:page]).per_page(Constants::PER_PAGE)
   end
 
   def show
