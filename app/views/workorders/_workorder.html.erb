@@ -105,11 +105,12 @@
         <%= f.text_field(:odometer) %>
       </td>
       <td width="35%" class="full">
-        <div class="bb">
-          <span class="extra-small">VIN</span>
-          <%= f.fields_for(:car) { |cf| cf.text_field(:vin_number, id: 'car_vin', style: 'width: 78%') } %>
+        <div class="bb" style="padding-left: 2px;">
+          <div class="extra-small fl" style="padding-right: 3px;">VIN</div>
+          <%= f.fields_for(:car) { |cf| cf.text_field(:vin_number, id: 'car_vin', style: 'width: 82%', class: 'fl') } %>
+          <div class="c"></div>
         </div>
-        <div>
+        <div style="padding-left: 2px;">
           <span class="extra-small">Engine</span>
           <%= f.fields_for(:car) { |cf| cf.text_field(:engine_size, id: 'car_engine_size', style: 'width: 64%') } %>
         </div>
@@ -201,12 +202,12 @@
   of mechant-ability or fitness for a particular purpose, and neither assumes nor authorizes any other person to
   assume for it any liability in connection with the sale of said products.
 </div>
-<div class="fr shaded bb" style="width: 81px;">
+<div class="fr shaded bb" style="width: 70px;">
   <div style="border-right: 1px solid #666;">
     <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, value: '%.2f' % @workorder.balance_due.to_f, class: 'num table-input', style: 'margin-top: 8px;') %></div>
   </div>
 </div>
-<div class="fr shaded" style="width:122px;">
+<div class="fr shaded" style="width:106px;">
   <div style="border: 1px solid #666; border-top: none;">
     <div class="num shaded" style="font-size: 13px;font-weight: bold; padding: 10px 3px 10px 0;height: 22px;">Balance Due</div>
   </div>
