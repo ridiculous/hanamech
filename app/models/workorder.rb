@@ -2,7 +2,7 @@ class Workorder < ActiveRecord::Base
 
   include UpgradeUtility
 
-  PARTS = 23
+  PARTS = 22
   JOBS = PARTS - 7
 
   belongs_to :car
