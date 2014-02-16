@@ -2,8 +2,6 @@ class CarsController < ApplicationController
 
   before_filter :set_car, except: :index
 
-  include CarsHelper
-
   def index
     @customer = current_user.customers.find_by_id(params[:customer_id])
     if @customer

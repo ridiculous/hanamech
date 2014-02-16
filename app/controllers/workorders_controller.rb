@@ -21,10 +21,12 @@ class WorkordersController < ApplicationController
   end
 
   def show
+    @workorder.prepare
     respond_to do |format|
-      format.html
+      format.html do
+        render(:edit)
+      end
       format.pdf do
-        @workorder.prepare
         file_name = "#{Constants::NAME.downcase.gsub(/\W+/, '_')}_workorder_#{@workorder.id}"
         pdf_file = Rails.root.join('private', 'workorders', "#{file_name}.pdf")
         render :pdf => file_name,

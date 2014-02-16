@@ -50,8 +50,9 @@ class Workorder < ActiveRecord::Base
     end
   end
 
+  # if it has no name, then squash it
   def incomplete_item?(obj)
-    suspect = obj.each_value.detect { |val| val.blank? unless val.respond_to?(:values) }
+    suspect = obj.each_value.detect { |x| x.respond_to?(:values) && x[:name].blank? }
     if suspect && obj.has_key?(:id)
       !(obj[:_destroy] = true) # false
     else
@@ -62,6 +63,11 @@ class Workorder < ActiveRecord::Base
   def copy_odometer_to_car
     car.odometer = odometer if car && odometer.to_i > car.try(:odometer).to_i
   end
+
+  #
+  #= Upgrading to V2
+  #
+  # TODO: Delete after upgrade
 
   def convert_to_v2
     destroy && return if car.nil?
@@ -75,7 +81,7 @@ class Workorder < ActiveRecord::Base
   end
 
   def do_parts
-    wo_mats = materials.split(/,\s|\r\n/) # comma or carriage return and new line
+    wo_mats = split(materials)
     len = wo_mats.length
     wo_mats.each do |mats|
       build_workorder_parts(mats, len)
@@ -83,17 +89,22 @@ class Workorder < ActiveRecord::Base
   end
 
   def do_jobs
-    wo_details = details.split(/,\s|\r\n/) # comma or carriage return and new line
+    wo_details = split(details)
     len = wo_details.length
     wo_details.each do |dets|
       build_workorder_jobs(dets, len)
     end
   end
 
+  # periods that are not followed by a number and comma or carriage return and new line
+  def split(str)
+    str.split(/\.+(?=[^0-9])|[,\r\n]/).reject { |s| s.blank? || s == '.' }.map { |s| s.gsub(/\s+/, ' ').strip }
+  end
+
   def build_workorder_parts(mats, len)
     qt = get_quantity(mats)
     price = len == 1 ? parts_total : 0.0
-    name =  mats.sub(Regexp.new("#{qt} "), '')
+    name = mats.sub(Regexp.new("#{qt} "), '')
     return unless name.present?
     part = Part.find_or_initialize_by(name: name)
     unless part.persisted?
@@ -105,7 +116,6 @@ class Workorder < ActiveRecord::Base
 
   def build_workorder_jobs(dets, len)
     price = len == 1 ? labor : 0.0
-    return unless dets.present?
     job = Job.find_or_initialize_by(name: dets)
     unless job.persisted?
       job.hours = 1

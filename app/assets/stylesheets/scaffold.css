@@ -360,7 +360,7 @@ table.plain td.ra {
 input[type=text],
 input[type=email],
 input[type=password] {
-    width: 200px;
+    width: 350px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;

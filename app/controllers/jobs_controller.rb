@@ -54,10 +54,10 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
-    @job.destroy
-    respond_to do |format|
-      format.html { redirect_to jobs_url }
-      format.json { head :no_content }
+    if @job.destroy
+      redirect_to jobs_path, notice: 'Job deleted'
+    else
+      redirect_to job_path(@job), alert: "Job cannot be deleted because it's used by a workorder"
     end
   end
 
@@ -69,7 +69,7 @@ class JobsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def job_params
-    params[:job]
+    params[:job].permit(:name, :hours)
   end
 
   def sort_column

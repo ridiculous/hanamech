@@ -5,9 +5,7 @@
     <%= render_paging %>
     <table cellpadding="5" cellspacing="0" class="nice">
       <tr>
-        <th><%= sortable "car_make", "Car make" %></th>
-        <th><%= sortable "car_model", "Car model" %></th>
-        <th><%= sortable "year" %></th>
+        <th><%= sortable "year_make_model" %></th>
         <th>Vin number</th>
         <th>Customer</th>
         <th></th>
@@ -16,9 +14,7 @@
       </tr>
       <% @cars.each do |car| %>
           <tr>
-            <td><%= link_to car.car_make, my_car_path(car) %></td>
-            <td><%= car.car_model %></td>
-            <td><%= car.year %></td>
+            <td><%= link_to car.year_make_model, my_car_path(car) %></td>
             <td><%= car.vin_number %></td>
             <td><%= car.customer.try(:name) %></td>
             <td><%= link_to 'Edit', edit_customer_car_path(car.customer, car) if can?(:update, car) %></td>

@@ -1,4 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="pb10">
+  <%= link_to 'Edit', edit_job_path(@job) %>
+  <%= link_to 'Delete', job_path(@job), data: {confirm: 'Are you sure?'}, method: :delete, class: 'delete' %>
+</div>
+<div class="box fl">
+  <p><b>Name</b></p>
+  <%= @job.name %>
+</div>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+<div class="box fl">
+  <p><b>Time</b></p>
+  <%= pluralize(@job.hours, 'Hour') rescue @job.hours %>
+</div>
+
+<div class="box fl">
+  <p><b>Workorders using this job</b></p>
+  <% @job.workorders.each do |wo| %>
+      <%= link_to "#{wo.customer.try(:name) || '[None]'} on #{wo.date}", edit_my_wo_path(wo) %>
+      <br/>
+  <% end %>
+</div>
+
+<div class="c"></div>

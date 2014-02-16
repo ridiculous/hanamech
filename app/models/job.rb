@@ -6,4 +6,10 @@ class Job < ActiveRecord::Base
 
   validates :name, presence: true
 
+  before_destroy :empty_workorders?
+
+  def empty_workorders?
+    workorders.empty?
+  end
+
 end
