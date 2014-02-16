@@ -44,3 +44,12 @@ test:
   username: postgres
   password: access
   timeout: 5000
+
+production:
+  host: localhost
+  adapter: postgresql
+  database: hana_mech_development
+  pool: 5
+  username: postgres
+  password: access
+  timeout: 5000

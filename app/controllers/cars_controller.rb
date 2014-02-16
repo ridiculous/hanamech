@@ -1,22 +1,25 @@
 class CarsController < ApplicationController
-  before_filter :authenticate_user
-
-  helper_method :sort_column, :sort_direction
 
   before_filter :set_car, except: :index
-
-  include CarsHelper
 
   def index
     @customer = current_user.customers.find_by_id(params[:customer_id])
     if @customer
       @cars = @customer.cars
     elsif current_user.luna?
-      @cars = Car.includes(:customer)
+      @cars = Car.where(nil)
     else
       redirect_to(logout_path) and return
     end
-    @cars = @cars.order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(Constants::PER_PAGE)
+    respond_to do |format|
+      format.html do
+        @cars = @cars.includes(:customer) \
+            .order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(Constants::PER_PAGE)
+      end
+      format.json do
+        render json: Car.all_as_json(current_user.customer_id)
+      end
+    end
   end
 
   def show
@@ -56,11 +59,7 @@ class CarsController < ApplicationController
   private
 
   def sort_column
-    Car.column_names.include?(params[:sort]) ? params[:sort] : "car_make"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    super('car_make')
   end
 
   def set_car

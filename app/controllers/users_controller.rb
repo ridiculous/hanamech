@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user
   before_filter :set_user, only: [:edit, :update]
 
   def index
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize! :create, @user
+    authorize! :update, @user
     user_params = params.require(:user).permit!
     @customer = @user.customer
     @user.email = user_params[:email]

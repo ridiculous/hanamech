@@ -7,9 +7,9 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-#gem 'mysql2'
+
 gem 'thin'
-gem 'will_paginate', '~> 3.0.0'
+gem 'will_paginate', '~> 3.0.4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -43,11 +43,21 @@ group :development do
   gem 'binding_of_caller'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'cancan'
 gem 'newrelic_rpm'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'

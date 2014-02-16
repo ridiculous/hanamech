@@ -1,8 +1,11 @@
 class WorkordersController < ApplicationController
-  before_filter :authenticate_user
-  before_filter :set_cars, only: [:edit, :update, :new, :create]
+
   before_filter :set_workorder, except: :index
 
+  before_filter only: [:create, :update] do
+    wo = params[:workorder]
+    wo[:date].try(:gsub!, %r{(\d{2})/(\d{2})/(\d+)}, '\3-\1-\2')
+  end
 
   def index
     @car = Car.find_by_id(params[:car_id])
@@ -11,27 +14,48 @@ class WorkordersController < ApplicationController
                     @total = @car.workorders.map(&:real_total).reduce(:+)
                     @car.workorders
                   else
-                    Workorder.includes(:car)
+                    Workorder.where(nil)
                   end
-    @workorders = @workorders.order('date DESC, car_id').page(params[:page]).per_page(Constants::PER_PAGE)
+    @workorders = @workorders.includes(:car, :customer, :jobs) \
+                  .order('date DESC, car_id').page(params[:page]).per_page(Constants::PER_PAGE)
   end
 
   def show
+    @workorder.prepare
+    respond_to do |format|
+      format.html do
+        render(:edit)
+      end
+      format.pdf do
+        file_name = "#{Constants::NAME.downcase.gsub(/\W+/, '_')}_workorder_#{@workorder.id}"
+        pdf_file = Rails.root.join('private', 'workorders', "#{file_name}.pdf")
+        render :pdf => file_name,
+               :formats => [:pdf],
+               :save_to_file => pdf_file,
+               :save_only => true,
+               :orientation => 'Landscape',
+               page_size: 'Letter'
+
+        send_file(pdf_file, type: 'application/pdf')
+      end
+    end
   end
 
   def new
-    @workorder.car || @workorder.build_car
+    @workorder.prepare
+    @workorder.date = Date.today
   end
 
   def edit
+    @workorder.prepare
   end
 
   def create
     authorize! :create, @workorder
-    @workorder.attributes = params.require(:workorder).permit!
-    if @workorder.save
-      redirect_to(car_workorder_path(@workorder.car, @workorder), notice: 'Work Orders was successfully created')
+    if @workorder.update_attributes(params.require(:workorder).permit!)
+      redirect_to(car_workorders_path(@workorder.car), notice: 'Workorder created')
     else
+      @workorder.prepare
       render(:new)
     end
   end
@@ -39,16 +63,17 @@ class WorkordersController < ApplicationController
   def update
     authorize! :update, @workorder
     if @workorder.update_attributes(params.require(:workorder).permit!)
-      redirect_to(car_workorder_path(@workorder.car, @workorder), :notice => 'Work Order was successfully updated')
+      redirect_to(edit_car_workorder_path(@workorder.car, @workorder), :notice => "Workorder updated. #{view_context.link_to('Back to workorders', view_context.my_wos_path)}")
     else
-      render "edit"
+      @workorder.prepare
+      render(:edit)
     end
   end
 
   def destroy
     authorize! :destroy, @workorder
     @workorder.destroy
-    redirect_to(car_workorders_path(@car), notice: 'Work Orders has been deleted')
+    redirect_to(car_workorders_path(@car), notice: 'Work Order has been deleted')
   end
 
   def printable
@@ -58,29 +83,20 @@ class WorkordersController < ApplicationController
 
   private
 
-  def set_cars
-    @cars ||= Car.includes(:customer).group('customers.id', 'cars.id').order('customers.last_name').map do |car|
-      ["#{car.customer.full_name} - #{car.car_make} #{car.car_model}", car.id]
-    end
-  end
-
   def set_workorder
     @workorder = if params[:car_id]
-                   @car = Car.find(params[:car_id])
-                   if params[:id]
-                     @car.workorders.find(params[:id])
-                   else
-                     @car.workorders.new
-                   end
+                   Car.find(params[:car_id]).workorders
                  else
-                   if params[:id]
-                     Workorder.find(params[:id])
-                   else
-                     Workorder.new
-                   end
+                   Workorder.where(nil)
                  end
-    @car ||= @workorder.car
+    @workorder = @workorder.includes(:jobs, :parts).find_or_initialize(params[:id])
+    @car = @workorder.car
     @customer = @car.customer if @car
+    @workorder.odometer ||= @car.try(:odometer)
+  end
+
+  def access_denied
+    redirect_to(car_workorders_path(@car), alert: 'You are not authorized to update workorders')
   end
 
 end

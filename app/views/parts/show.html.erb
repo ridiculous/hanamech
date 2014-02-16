@@ -1,0 +1,24 @@
+<div class="pb10">
+  <%= link_to 'Edit', edit_part_path(@part) %>
+  <%= link_to 'Delete', part_path(@part), data: {confirm: 'Are you sure?'}, method: :delete, class: 'delete' %>
+</div>
+<div class="box fl">
+  <p><b>Name</b></p>
+  <%= @part.name %>
+</div>
+
+<div class="box fl">
+  <p><b>Price</b></p>
+  <%= @part.price %>
+</div>
+
+<div class="box fl">
+  <p><b>Workorders using this part</b></p>
+  <% @part.workorders.includes(:customer).each do |wo| %>
+      <div style="padding: 2px 0;">
+        <%= link_to "#{wo.customer.try(:name) || '[None]'} on #{wo.date}", edit_my_wo_path(wo) %>
+      </div>
+  <% end %>
+</div>
+
+<div class="c"></div>

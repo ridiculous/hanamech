@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
 
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
 
   def customers
     luna? ? Customer.all : Customer.where(id: customer_id)
@@ -17,10 +18,6 @@ class User < ActiveRecord::Base
 
   def workorders
     luna? ? Workorder.all : super
-  end
-
-  def luna?
-    customer_id.nil? && luna
   end
 
   def generate_token(column)

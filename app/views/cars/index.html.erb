@@ -5,9 +5,7 @@
     <%= render_paging %>
     <table cellpadding="5" cellspacing="0" class="nice">
       <tr>
-        <th><%= sortable "car_make", "Car make" %></th>
-        <th><%= sortable "car_model", "Car model" %></th>
-        <th><%= sortable "year" %></th>
+        <th><%= sortable "year_make_model" %></th>
         <th>Vin number</th>
         <th>Customer</th>
         <th></th>
@@ -16,16 +14,14 @@
       </tr>
       <% @cars.each do |car| %>
           <tr>
-            <td><%= link_to car.car_make, my_car_path(car) %></td>
-            <td><%= car.car_model %></td>
-            <td><%= car.year %></td>
+            <td><%= link_to car.year_make_model, my_car_path(car) %></td>
             <td><%= car.vin_number %></td>
-            <td><%= car.customer.try(:full_name) %></td>
+            <td><%= car.customer.try(:name) %></td>
             <td><%= link_to 'Edit', edit_customer_car_path(car.customer, car) if can?(:update, car) %></td>
-            <td><%= link_to "Work Orders (#{car.workorders.count})", car_workorders_path(car) %> <%=  %></td>
+            <td><%= link_to "Workorders", car_workorders_path(car) %> <%=  %></td>
             <td>
               <% if can?(:destroy, car) %>
-                  <%= link_to 'Delete', my_car_path(car), data: {confirm: "Are you sure you want to delete this #{car.car_make}? All work orders for this car will also be deleted!"}, method: :delete, class: 'delete' %>
+                  <%= link_to 'Delete', my_car_path(car), data: {confirm: 'Are you sure? All workorders for this car will also be deleted!'}, method: :delete, class: 'delete' %>
               <% end %>
             </td>
           </tr>
@@ -34,7 +30,7 @@
         <td colspan="9">
           <% if @cars.count > 14 %>
               <br />
-              <p style="text-align: center; color: #66B7E7; font-size: 18px">>>><a href="#top">Top</a><<<</p>
+              <p style="text-align: center; color: #66B7E7; font-size: 18px"><a href="#top">Top</a></p>
           <% end %>
         </td>
       </tr>

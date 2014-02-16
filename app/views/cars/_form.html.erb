@@ -1,50 +1,27 @@
 <%= form_for([@customer, @car]) do |f| %>
-  <% if @car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being added:</h2>
-
-      <ul>
-        <% @car.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <%= errors_for(@car) %>
+    <div class="field">
+      <%= f.label :customer_id %>
+      <br/>
+      <%= f.select(:customer_id, Customer.all.map { |custmr| [custmr.name, custmr.id] }, prompt: '------ CUSTOMER SELECTION ------') %>
     </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :customer_id %><br/>
-    <%= f.select(:customer_id, Customer.all.map{ |custmr| [custmr.full_name, custmr.id]}, prompt: '------ CUSTOMER SELECTION ------' )  %>
-  </div>
-  <div class="field">
-    <%= f.label :car_make %><br />
-    <%= f.text_field :car_make %>
-  </div>
-  <div class="field">
-    <%= f.label :car_model %><br />
-    <%= f.text_field :car_model %>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br />
-    <%= f.text_field :year %>
-  </div>
-  <div class="field">
-    <%= f.label :engine_size %><br />
-    <%= f.text_field :engine_size %>
-  </div>
-  <div class="field">
-    <%= f.label :vin_number %><br />
-    <%= f.text_field :vin_number %>
-  </div>
-  <%#*<div class="field">%>
-  <%# unless @car.customer_id.nil? || @car.customer_id == 0 %>
-  <%# @owner = Customer.find(@car.customer_id) %>
-  <%#= f.text_field(:customer_id, :value => @owner[:last_name]+', '+@owner[:first_name]) %>
-  <%# else %>
-  <%#= f.label :customer_id %>
-  <%#= f.text_field :customer_id %>
-  <%# end %>
-  <%#*</div>%>
-  <div class="actions">
-    <%= f.submit %>
-    <%= link_to 'Cancel', (@car.id.nil? ? my_cars_path : my_car_path(@car)) %>
-  </div>
+    <div class="field">
+      <%= f.label :year_make_model, 'Year<span class="spacer">&sdot;</span>Make<span class="spacer">&sdot;</span>Model'.html_safe %>
+      <br/>
+      <%= f.text_field :year_make_model %>
+    </div>
+    <div class="field">
+      <%= f.label :engine_size %>
+      <br/>
+      <%= f.text_field :engine_size %>
+    </div>
+    <div class="field">
+      <%= f.label :vin_number %>
+      <br/>
+      <%= f.text_field :vin_number %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+      <%= link_to 'Cancel', (@car.id.nil? ? my_cars_path : my_car_path(@car)) %>
+    </div>
 <% end %>

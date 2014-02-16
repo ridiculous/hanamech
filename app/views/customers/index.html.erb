@@ -4,8 +4,7 @@
 <%= render_paging %>
 <table cellpadding="5" cellspacing="0" class="nice">
   <tr>
-    <th><%= sortable "first_name", "First name" %></th>
-    <th><%= sortable "last_name", "Last name" %></th>
+    <th><%= sortable "name" %></th>
     <th>Phone number</th>
     <th><%= sortable "email" %></th>
     <th>Cell number</th>
@@ -16,8 +15,7 @@
 
   <% @customers.each do |customer| %>
       <tr>
-        <td><%= link_to(customer.first_name, customer_path(customer)) %></td>
-        <td><%= link_to(customer.last_name, customer_path(customer)) %></td>
+        <td><%= link_to(customer.name, customer_path(customer)) %></td>
         <td><%= customer.phone_number %></td>
         <td><%= customer.email %></td>
         <td><%= customer.cell_number %></td>
@@ -29,5 +27,5 @@
 </table>
 <% if @customers.count > 14 %>
     <br/>
-    <p style="text-align: center; color: #66B7E7; font-size: 18px">>>><a href="#top">Top</a><<<</p>
+    <p style="text-align: center; color: #66B7E7; font-size: 18px"><a href="#top">Top</a></p>
 <% end %>

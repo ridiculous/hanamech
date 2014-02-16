@@ -16,3 +16,6 @@ rerun.txt
 pickle-email-*.html
 .idea
 .DS_Store
+.env
+lib/wicked_pdf/wkhtmltopdf-mac
+private/*

@@ -2,17 +2,19 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Hana Mechanical</title>
+  <title><%= Constants::NAME %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= yield :head if content_for?(:head) %>
 </head>
 <body>
 <div>
-  <a name="top"></a>
+  <header>
+    <a name="top" style="padding: 0"></a>
 
-  <p class="head-er">Hana Mechanical</p>
-
+    <h1 class="header"><%= Constants::NAME %></h1>
+  </header>
   <div id="out">
     <% set_customer_mode %>
     <%= main_nav_links(in_customer_mode) %>
@@ -20,10 +22,10 @@
         <div class="customer-menu">
 
           <%= content_tag(:span, class: 'customer-actions') do %>
-              <%= link_to(@customer.full_name, customer_path(@customer), class: "#{'active' if controller_name == 'customers'}") %>
-              <%= link_to('Cars', customer_cars_path(@customer), class: "#{'active' if request.path =~ /(cars|cars\/new)\z/}") %>
-              <% @customer.cars.reject(&:new_record?).slice(0, 3).each do |car| %>
-                  <%= link_to(car.name, customer_car_path(@customer, car), class: "#{'active' if request.path =~ Regexp.new(car.id.to_s)}") %>
+              <%= tab_link_to(@customer.name, customer_path(@customer), controller_name == 'customers') %>
+              <%= tab_link_to('Cars', customer_cars_path(@customer), request.path =~ /(cars|cars\/new)\z/) %>
+              <% @customer.cars.reject(&:new_record?).slice(0, 5).each do |car| %>
+                  <%= tab_link_to(car.name, customer_car_path(@customer, car), request.path =~ Regexp.new("cars/#{car.id}")) %>
               <% end %>
           <% end %>
         </div>
@@ -32,9 +34,16 @@
 
     <div id="container">
       <%= flash_message_helper %>
-      <%= yield %>
+      <div class="pl10 pr10">
+        <%= yield %>
+      </div>
     </div>
   </div>
 </div>
+<% if params[:clear].present? %>
+    <script>
+        Site.cache.clear('<%= params[:clear].strip %>');
+    </script>
+<% end %>
 </body>
 </html>

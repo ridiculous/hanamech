@@ -1,0 +1,25 @@
+<div class="head-under fl">Part List</div>
+<%= link_to('New Part', new_part_path, class: 'ml10 fl') if can?(:create, Part) %>
+<div class="reset"></div>
+<%= render_paging %>
+<table cellpadding="5" cellspacing="0" class="nice">
+  <tr>
+    <th><%= sortable('name') %></th>
+    <th><%= sortable('price') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @parts.each do |part| %>
+      <tr>
+        <td><%= link_to(part.name, part_path(part)) %></td>
+        <td><%= part.price %></td>
+        <td><%= link_to 'Edit', edit_part_path(part) %></td>
+        <td><%= link_to('Delete', part,method: :delete, data: { confirm: 'Are you sure?' }, method: :delete, class: 'delete') %></td>
+      </tr>
+  <% end %>
+</table>
+<% if @parts.count > 14 %>
+    <br/>
+    <p style="text-align: center; color: #66B7E7; font-size: 18px"><a href="#top">Top</a></p>
+<% end %>

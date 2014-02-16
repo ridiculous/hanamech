@@ -1,0 +1,21 @@
+<%= form_for(@job) do |f| %>
+    <%= errors_for(@job) %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :hours %>
+      <br/>
+      <%= f.text_field :hours %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <div class="pt10">
+      Please note the name of this job will be updated on any workorders using it
+    </div>
+<% end %>

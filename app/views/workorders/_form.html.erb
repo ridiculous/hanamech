@@ -1,63 +1,12 @@
-<%= form_for([@car, @workorder]) do |f| %>
-    <% if @workorder.errors.any? %>
-        <div id="error_explanation" class="alert">
-          <h2><%= pluralize(@workorder.errors.count, "error") %> prohibited this work order from being saved:</h2>
-          <ul>
-            <% @workorder.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <div class="field">
-      <%= f.select(:car_id, @cars, prompt: '------------------------ CAR SELECTION ---------------------------') %>
-    </div>
-    <div style="width: 322px; float: left">
-      <div class="field">
-        <%= f.label :date %>
-        <br/>
-        <%= f.date_select :date %>
-      </div>
-      <div class="field">
-        <%= f.label :details %>
-        <span style="color:red">*</span><br/>
-        <%= f.text_area :details, :rows => 4, :cols => 30 %>
-      </div>
-      <div class="field">
-        <%= f.label :materials %>
-        <br/>
-        <%= f.text_area :materials, :rows => 4, :cols => 30 %>
-      </div>
-      <div class="field">
-        <%= f.label :odometer %>
-        <br/>
-        <%= f.text_field :odometer %>
-      </div>
-    </div>
-    <div style="width: 150px; float: left">
-      <div class="field">
-        <%= f.label :parts %>
-        <br/>
-        <%= f.text_field :parts, class: 'factored' %>
-      </div>
-      <div class="field">
-        <%= f.label :labor %>
-        <br/>
-        <%= f.text_field :labor, class: 'factored' %>
-      </div>
-      <div class="field">
-        <%= f.label :tax %>
-        <br/>
-        <%= f.text_field :tax, class: 'factored' %>
-      </div>
-      <div class="field">
-        <%= f.label :total %>
-        <br/>
-        <%= f.text_field :total %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-    </div>
-    <div class="reset"></div>
+<%= content_for(:head) do %>
+    <%= javascript_include_tag :workorder_manifest %>
 <% end %>
+<%= errors_for(@workorder) %>
+<div class="landscape-page">
+  <%= form_for([@car, @workorder]) do |f| %>
+      <%= render partial: 'workorder', locals: {f: f} %>
+
+      <div class="fr pt10"><%= f.submit %></div>
+      <div class="reset"></div>
+  <% end %>
+</div>

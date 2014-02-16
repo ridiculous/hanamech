@@ -1,10 +1,10 @@
 module WorkordersHelper
 
   def materials_list(mats)
-    if mats.empty?
+    if mats.blank?
       content_tag(:li, "None")
     else
-      mats.split(/, /).collect{|mat| content_tag :li, mat}.join
+      mats.split(/, /).collect { |mat| content_tag :li, mat }.join
     end
   end
 
@@ -26,6 +26,15 @@ module WorkordersHelper
     end
   end
 
+  def edit_my_wo_path(wo=@workorder)
+    set_customer_mode
+    if in_customer_mode
+      edit_car_workorder_path(@car, wo)
+    else
+      edit_workorder_path(wo)
+    end
+  end
+
   def my_wos_path
     set_customer_mode
     if in_customer_mode
@@ -34,5 +43,4 @@ module WorkordersHelper
       workorders_path
     end
   end
-
 end

@@ -1,12 +1,32 @@
-/**
- * Created with JetBrains RubyMine.
- * User: ryanbuckley
- * Date: 8/2/13
- * Time: 8:39 PM
- * To change this template use File | Settings | File Templates.
- */
+var Site = {
+    cache: {
+        getStorage: function () {
+            if (typeof localStorage == 'object') {
+                return localStorage;
+            } else if (typeof globalStorage == 'object') {
+                return globalStorage[location.host];
+            } else
+                return {};
+        },
 
-jUtils.addEvent(window, 'load', function () {
-    bindDeleteLinks();
-    bindWorkOrderHelper();
-});
+        get: function (key) {
+            return this.getStorage()[key];
+        },
+
+        customersLoaded: function () {
+            return typeof this.get('customers') === 'string';
+        },
+
+        getCustomers: function () {
+            return JSON.parse(this.get('customers'));
+        },
+
+        save: function (key, data) {
+            this.getStorage()[key] = JSON.stringify(data);
+        },
+
+        clear: function (key) {
+            return delete this.getStorage()[key];
+        }
+    }
+};
