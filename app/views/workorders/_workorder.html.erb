@@ -69,15 +69,15 @@
 <div class="parts-section fl">
     <table class="ctable" cellpadding="0" cellspacing="0">
         <tr>
-            <th>Quantity</th>
-            <th>Part Description</th>
-            <th>Price</th>
+            <th width="15%">Quantity</th>
+            <th width="69%">Part Description</th>
+            <th width="15%">Price</th>
         </tr>
         <%= f.fields_for(:workorder_parts) do |wo_part| %>
         <tr>
-            <td width="20%"><%= wo_part.text_field(:quantity, class: 'num part-quantity') %></td>
-            <td width="59%"><%= wo_part.fields_for(:part) { |part| part.text_field(:name, class: 'part-name') } %></td>
-            <td width="20%"><%= wo_part.text_field(:price, class: 'num part-price') %></td>
+            <td><%= wo_part.text_field(:quantity, class: 'num part-quantity') %></td>
+            <td><%= wo_part.fields_for(:part) { |part| part.text_field(:name, class: 'part-name') } %></td>
+            <td><%= wo_part.text_field(:price, class: 'num part-price') %></td>
         </tr>
         <% end %>
         <tr>
@@ -118,15 +118,15 @@
     </table>
     <table class="ctable" cellpadding="0" cellspacing="0" style="border-left: none;">
         <tr>
-            <th>Hours</th>
-            <th>Job Description</th>
-            <th>Total</th>
+            <th width="15%">Hours</th>
+            <th width="69%">Job Description</th>
+            <th width="15%">Total</th>
         </tr>
         <%= f.fields_for(:workorder_jobs) do |woj| %>
         <tr>
-            <td width="20%"><%= woj.text_field(:hours, class: 'num hours-total') %></td>
-            <td width="59%"><%= woj.fields_for(:job) { |jf| jf.text_field(:name, class: 'job-name') } %></td>
-            <td width="20%"><%= woj.text_field(:total, class: 'num labor-total') %></td>
+            <td><%= woj.text_field(:hours, class: 'num hours-total') %></td>
+            <td><%= woj.fields_for(:job) { |jf| jf.text_field(:name, class: 'job-name') } %></td>
+            <td><%= woj.text_field(:total, class: 'num labor-total') %></td>
         </tr>
         <% end %>
         <tr>
@@ -201,11 +201,11 @@
     of mechant-ability or fitness for a particular purpose, and neither assumes nor authorizes any other person to
     assume for it any liability in connection with the sale of said products.
 </div>
-<div class="fr shaded bb" style="border-right: 1px solid #666;width: 80px">
+<div class="fr shaded bb" style="border-right: 1px solid #666;width: 82px">
     <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, value: '%.2f' % @workorder.balance_due.to_f, class: 'num table-input', style: 'margin-top: 8px;') %></div>
 </div>
 <div class="fr shaded" style="border: 1px solid #666; border-top: none;">
-    <div class="num shaded" style="font-size: 13px;font-weight: bold; padding: 10px 3px 10px 0;width:81px;height: 22px;">Balance
+    <div class="num shaded" style="font-size: 13px;font-weight: bold; padding: 10px 3px 10px 0;width:118px;height: 22px;">Balance
         Due
     </div>
 </div>

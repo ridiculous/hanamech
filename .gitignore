@@ -18,4 +18,4 @@ pickle-email-*.html
 .DS_Store
 .env
 lib/wicked_pdf/wkhtmltopdf-mac
-private/*
+private/workorders/*.pdf
