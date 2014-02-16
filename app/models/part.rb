@@ -8,6 +8,10 @@ class Part < ActiveRecord::Base
 
   before_destroy :empty_workorders?
 
+  def self.all_as_json
+    ActiveRecord::Base.connection.select_all("SELECT name, price FROM #{quoted_table_name}").to_a
+  end
+
   def empty_workorders?
     workorders.empty?
   end

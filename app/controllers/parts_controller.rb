@@ -4,7 +4,18 @@ class PartsController < ApplicationController
   # GET /parts
   # GET /parts.json
   def index
-    @parts = Part.order("#{lowered_column} #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+    if current_user.luna?
+      respond_to do |format|
+        format.html do
+          @parts = Part.order("#{lowered_column} #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+        end
+        format.json do
+          render json: Part.all_as_json
+        end
+      end
+    else
+      redirect_to(logout_path)
+    end
   end
 
   # GET /parts/1

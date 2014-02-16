@@ -8,7 +8,15 @@ class Car < ActiveRecord::Base
 
   after_validation :set_year_make_model
 
-  attr_accessor :workorder_count
+  def self.all_as_json(the_customer=nil)
+    ActiveRecord::Base.connection.select_all(query(the_customer)).to_a
+  end
+
+  def self.query(the_customer=nil)
+    q = "SELECT year_make_model, odometer, vin_number, engine_size FROM #{quoted_table_name}"
+    q += "WHERE customer_id = #{the_customer.to_i}" if the_customer
+    q
+  end
 
   def name
     wip = "#{car_make} #{car_model}"

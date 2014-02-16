@@ -1,7 +1,6 @@
 class WorkordersController < ApplicationController
 
   before_filter :set_workorder, except: :index
-  before_filter :bootsrap_data, only: [:new, :edit, :update, :create]
 
   before_filter only: [:create, :update] do
     wo = params[:workorder]
@@ -86,22 +85,14 @@ class WorkordersController < ApplicationController
 
   def set_workorder
     @workorder = if params[:car_id]
-                   Car.find(params[:car_id]).workorders.find_or_initialize(params[:id])
+                   Car.find(params[:car_id]).workorders
                  else
-                   Workorder.find_or_initialize(params[:id])
+                   Workorder.where(nil)
                  end
+    @workorder = @workorder.includes(:jobs, :parts).find_or_initialize(params[:id])
     @car = @workorder.car
     @customer = @car.customer if @car
     @workorder.odometer ||= @car.try(:odometer)
-  end
-
-  def bootsrap_data
-    @part_names = select_name_from('parts')
-    @job_names = select_name_from('jobs')
-  end
-
-  def select_name_from(table_name)
-    ActiveRecord::Base.connection.select_all("SELECT name FROM #{table_name}").map { |x| x['name'] }
   end
 
   def access_denied

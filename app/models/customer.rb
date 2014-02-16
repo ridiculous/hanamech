@@ -52,14 +52,7 @@ class Customer < ActiveRecord::Base
     end
 
     def all_as_json
-      ActiveRecord::Base.connection.select_all("SELECT name, phone_number, street, city_state FROM customers").map { |customer|
-        {
-            name: customer['name'],
-            phone: customer['phone_number'],
-            street: customer['street'],
-            city_state: customer['city_state']
-        }
-      }
+      ActiveRecord::Base.connection.select_all("SELECT name, phone_number, street, city_state FROM #{quoted_table_name}").to_a
     end
   end
 end

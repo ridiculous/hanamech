@@ -4,7 +4,18 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.order("#{lowered_column} #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+    if current_user.luna?
+      respond_to do |format|
+        format.html do
+          @jobs = Job.order("#{lowered_column} #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+        end
+        format.json do
+          render json: Job.all_as_json
+        end
+      end
+    else
+      redirect_to(logout_path)
+    end
   end
 
   # GET /jobs/1

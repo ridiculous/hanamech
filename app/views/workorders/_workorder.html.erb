@@ -98,7 +98,7 @@
             <td width="50%">
                 <div class="extra-small">Year<span class="spacer">&sdot;</span>Make<span class="spacer">&sdot;</span>Model
                 </div>
-                <%= f.fields_for(:car) { |cf| cf.text_field(:year_make_model) } %>
+                <%= f.fields_for(:car) { |cf| cf.text_field(:year_make_model, id: 'year_make_model') } %>
             </td>
             <td width="15%">
                 <div class="extra-small">Odometer</div>
@@ -107,11 +107,11 @@
             <td width="35%" class="full">
                 <div class="bb">
                     <span class="extra-small">VIN</span>
-                    <%= f.fields_for(:car) { |cf| cf.text_field(:vin_number, style: 'width: 78%') } %>
+                    <%= f.fields_for(:car) { |cf| cf.text_field(:vin_number, id: 'car_vin', style: 'width: 78%') } %>
                 </div>
                 <div>
                     <span class="extra-small">Engine</span>
-                    <%= f.fields_for(:car) { |cf| cf.text_field(:engine_size, style: 'width: 64%') } %>
+                    <%= f.fields_for(:car) { |cf| cf.text_field(:engine_size, id: 'car_engine_size', style: 'width: 64%') } %>
                 </div>
             </td>
         </tr>

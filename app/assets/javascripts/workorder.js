@@ -13,47 +13,101 @@ $(function () {
     partsCalculator();
     laborCalculator();
     totalCalculator();
+    partsAutocomplete();
+    jobsAutocomplete();
+    carsAutocomplete();
 
     $('#workorder_date').datepicker();
-    $('.part-name').autocomplete({
-        source: BOOTSTRAP.part_names
-    });
-
-    $('.job-name').autocomplete({
-        source: BOOTSTRAP.job_names
-    });
-
     $('.customer-name').one('click', function () {
         var name = this;
         if (Site.cache.customersLoaded()) {
-            bindAutocomplete(name, Site.cache.getCustomers());
+            customersAutocomplete(name, Site.cache.getCustomers());
         } else {
             $.getJSON('/customers', function (data) {
                 Site.cache.save('customers', data);
-                bindAutocomplete(name, data)
+                customersAutocomplete(name, data)
             })
         }
     });
 
-    function bindAutocomplete(field, data) {
+    function partsAutocomplete() {
+        setTimeout(function () {
+            $.getJSON('/parts', function (data) {
+                var parts = data;
+                $('.part-name').autocomplete({
+                    source: parts.map(function (item) {
+                        return item.name
+                    }),
+                    select: function (e, obj) {
+                        var part = parts.findObject(obj.item.value, 'name');
+                        $(this.parentElement.parentElement).find('.part-price').val(part.price);
+                    }
+                });
+            })
+        }, 50);
+    }
+
+    function jobsAutocomplete() {
+        setTimeout(function () {
+            $.getJSON('/jobs', function (data) {
+                var jobs = data;
+                $('.job-name').autocomplete({
+                    source: jobs.map(function (item) {
+                        return item.name
+                    }),
+                    select: function (e, obj) {
+                        var hours = jobs.findObject(obj.item.value, 'name').hours;
+                        $(this.parentElement.parentElement).find('.hours-total').val(hours);
+                    }
+                });
+            })
+        }, 275);
+    }
+
+    function carsAutocomplete() {
+        setTimeout(function () {
+            $.getJSON('/cars', function (data) {
+                var cars = data;
+                $('#year_make_model').autocomplete({
+                    source: cars.map(function (item) {
+                        return item.year_make_model
+                    }),
+                    select: function (e, obj) {
+                        var car = cars.findObject(obj.item.value, 'year_make_model');
+                        if (car.engine_size) {
+                            document.getElementById('car_engine_size').value = car.engine_size;
+                        }
+                        if (car.vin_number) {
+                            document.getElementById('car_vin').value = car.vin_number;
+                        }
+                        if (car.odometer) {
+                            document.getElementById('workorder_odometer').value = car.odometer;
+                        }
+                    }
+                });
+            })
+        }, 550);
+    }
+
+    function customersAutocomplete(field, data) {
         $(field).autocomplete({
             source: data.map(function (item) {
                 return item.name
             }),
-            select: function(e, obj) {
-              var customer = Site.cache.getCustomers().findObject(obj.item.value, 'name');
+            select: function (e, obj) {
+                var customer = Site.cache.getCustomers().findObject(obj.item.value, 'name');
 
-              if(customer.street) {
-                document.getElementById('customer_street').value = customer.street;
-              }
+                if (customer.street) {
+                    document.getElementById('customer_street').value = customer.street;
+                }
 
-              if(customer.city_state) {
-                document.getElementById('customer_city_state').value = customer.city_state;
-              }
+                if (customer.city_state) {
+                    document.getElementById('customer_city_state').value = customer.city_state;
+                }
 
-              if(customer.phone) {
-                document.getElementById('customer_phone').value = customer.phone;
-              }
+                if (customer.phone_number) {
+                    document.getElementById('customer_phone').value = customer.phone_number;
+                }
             }
         });
     }
@@ -131,7 +185,7 @@ $(function () {
             var total = 0.0;
 
             for (var i = 0; i < $inputs.length; i++) {
-                var labor_val = $inputs[i].value
+                var labor_val = $inputs[i].value;
                 if (labor_val && utils.isNumeric(labor_val)) {
                     var hours_val = $($inputs[i].parentElement.parentElement).find('.hours-total').val();
                     if (hours_val && utils.isNumeric(hours_val)) {

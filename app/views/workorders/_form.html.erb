@@ -1,16 +1,7 @@
 <%= content_for(:head) do %>
-      <%= javascript_include_tag :workorder_manifest %>
+    <%= javascript_include_tag :workorder_manifest %>
 <% end %>
-<% if @workorder.errors.any? %>
-    <div id="error_explanation" class="alert">
-      <h2><%= pluralize(@workorder.errors.count, "error") %> prohibited this work order from being saved:</h2>
-      <ul>
-        <% @workorder.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+<%= errors_for(@workorder) %>
 <div class="landscape-page">
   <%= form_for([@car, @workorder]) do |f| %>
       <%= render partial: 'workorder', locals: {f: f} %>
@@ -19,7 +10,3 @@
       <div class="reset"></div>
   <% end %>
 </div>
-
-<script>
-  var BOOTSTRAP = <%= bootsrap_data.to_json.html_safe %>;
-</script>

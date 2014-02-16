@@ -11,8 +11,15 @@ class CarsController < ApplicationController
     else
       redirect_to(logout_path) and return
     end
-    @cars = @cars.includes(:customer) \
+    respond_to do |format|
+      format.html do
+        @cars = @cars.includes(:customer) \
             .order("#{sort_column} #{sort_direction}").page(params[:page]).per_page(Constants::PER_PAGE)
+      end
+      format.json do
+        render json: Car.all_as_json(current_user.customer_id)
+      end
+    end
   end
 
   def show
