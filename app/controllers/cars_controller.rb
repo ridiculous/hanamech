@@ -1,5 +1,7 @@
 class CarsController < ApplicationController
 
+  include CarsHelper
+
   before_filter :set_car, except: :index
 
   def index
