@@ -1,5 +1,5 @@
 body {
-    background-image: url('<%= asset_path('carbon_fibre.png') %>');
+    background-image: image-url('carbon_fibre.png');
     background-repeat: repeat;
     color: #333;
 }
