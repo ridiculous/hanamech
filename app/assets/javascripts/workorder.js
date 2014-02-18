@@ -17,7 +17,6 @@ $(function () {
     jobsAutocomplete();
     carsAutocomplete();
 
-    $('#workorder_date').datepicker();
     $('.customer-name').one('click', function () {
         var name = this;
         if (Site.cache.customersLoaded()) {
