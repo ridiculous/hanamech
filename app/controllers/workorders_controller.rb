@@ -28,15 +28,10 @@ class WorkordersController < ApplicationController
       end
       format.pdf do
         file_name = "#{Constants::NAME.downcase.gsub(/\W+/, '_')}_workorder_#{@workorder.id}"
-        pdf_file = Rails.root.join('private', 'workorders', "#{file_name}.pdf")
         render :pdf => file_name,
                :formats => [:pdf],
-               :save_to_file => pdf_file,
-               :save_only => true,
                :orientation => 'Landscape',
                page_size: 'Letter'
-
-        send_file(pdf_file, type: 'application/pdf')
       end
     end
   end
