@@ -77,13 +77,13 @@
         <tr>
           <td><%= wo_part.text_field(:quantity, class: 'num part-quantity') %></td>
           <td><%= wo_part.fields_for(:part) { |part| part.text_field(:name, class: 'part-name') } %></td>
-          <td><%= wo_part.text_field(:price, class: 'num part-price') %></td>
+          <td><%= wo_part.text_field(:price, value: format_amount(wo_part.object.price), class: 'num part-price') %></td>
         </tr>
     <% end %>
     <tr>
       <td colspan="2" class="num">Total Parts</td>
       <td>
-        <%= f.text_field(:parts_total, name: 'total_parts', id: 'total_parts', class: 'num', disabled: true, style: 'height: 19px;') %>
+        <%= f.text_field(:parts_total, value: '%.2f' % @workorder.parts_total.to_f, name: 'total_parts', id: 'total_parts', class: 'num', disabled: true, style: 'height: 19px;') %>
       </td>
     </tr>
   </table>
@@ -128,7 +128,7 @@
         <tr>
           <td><%= woj.text_field(:hours, class: 'num hours-total') %></td>
           <td><%= woj.fields_for(:job) { |jf| jf.text_field(:name, class: 'job-name') } %></td>
-          <td><%= woj.text_field(:total, class: 'num labor-total') %></td>
+          <td><%= woj.text_field(:total, value: format_amount(woj.object.total), class: 'num labor-total') %></td>
         </tr>
     <% end %>
     <tr>
@@ -154,7 +154,7 @@
           </tr>
           <tr>
             <td class="xx-small bt sub-cell" style="padding-right: 0">Paid In Advance</td>
-            <td class="bl bt" style="padding: 0 3px;"><%= f.text_field(:paid_in_advance, class: 'num') %></td>
+            <td class="bl bt" style="padding: 0 3px;"><%= f.text_field(:paid_in_advance, value: format_amount(@workorder.paid_in_advance), class: 'num') %></td>
             <td class="bl bt"></td>
             <td class="xx-small num bl bt sub-cell">Tax</td>
           </tr>
@@ -169,19 +169,19 @@
       <td class="extra-small num full">
         <table cellpadding="0" cellspacing="0" class="plain">
           <tr>
-            <td style="padding: 0 3px;"><%= f.text_field(:labor_total, value: '%.2f' % @workorder.labor_total.to_f, class: 'num part-of-total') %></td>
+            <td style="padding: 0 3px;"><%= f.text_field(:labor_total, value: format_amount(@workorder.labor_total), class: 'num part-of-total') %></td>
           </tr>
           <tr>
-            <td class="bt" style="padding: 0 3px;"><%= f.text_field(:parts_total, value: '%.2f' % @workorder.parts_total.to_f, class: 'num part-of-total') %></td>
+            <td class="bt" style="padding: 0 3px;"><%= f.text_field(:parts_total, value: format_amount(@workorder.parts_total), class: 'num part-of-total') %></td>
           </tr>
           <tr>
-            <td class="bt" style="padding: 0 3px;"><%= f.text_field(:tax_total, value: '%.2f' % @workorder.tax_total.to_f, class: 'num part-of-total') %></td>
+            <td class="bt" style="padding: 0 3px;"><%= f.text_field(:tax_total, value: format_amount(@workorder.tax_total), class: 'num part-of-total') %></td>
           </tr>
           <tr>
             <td></td>
           </tr>
           <tr>
-            <td class="bt" style="padding: 0 3px;font-size: 18px;height: 41px"><%= f.text_field(:total, value: '%.2f' % @workorder.total.to_f, class: 'num') %></td>
+            <td class="bt" style="padding: 0 3px;font-size: 18px;height: 41px"><%= f.text_field(:total, value: format_amount(@workorder.total), class: 'num') %></td>
           </tr>
         </table>
       </td>
@@ -205,7 +205,7 @@
 </div>
 <div class="fr shaded bb" style="width: 70px;">
   <div style="border-right: 1px solid #666;">
-    <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, value: '%.2f' % @workorder.balance_due.to_f, class: 'num table-input', style: 'margin-top: 8px;') %></div>
+    <div class="num shaded" style="height: 42px;padding-right: 3px;"><%= f.text_field(:balance_due, value: format_amount(@workorder.balance_due), class: 'num table-input', style: 'margin-top: 8px;') %></div>
   </div>
 </div>
 <div class="fr shaded" style="width:106px;">

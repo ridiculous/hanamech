@@ -43,4 +43,8 @@ module WorkordersHelper
       workorders_path
     end
   end
+
+  def format_amount(amt)
+    ('%.2f' % amt.to_f) unless amt.nil?
+  end
 end

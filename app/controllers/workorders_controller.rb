@@ -28,9 +28,9 @@ class WorkordersController < ApplicationController
       end
       format.pdf do
         file_name = "#{Constants::NAME.downcase.gsub(/\W+/, '_')}_workorder_#{@workorder.id}"
-        render :pdf => file_name,
-               :formats => [:pdf],
-               :orientation => 'Landscape',
+        render pdf: file_name,
+               formats: [:pdf],
+               orientation: 'Landscape',
                page_size: 'Letter'
       end
     end
