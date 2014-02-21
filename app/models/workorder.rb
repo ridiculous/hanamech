@@ -1,7 +1,5 @@
 class Workorder < ActiveRecord::Base
 
-  include UpgradeUtility
-
   PARTS = 22
   JOBS = PARTS - 7
 
