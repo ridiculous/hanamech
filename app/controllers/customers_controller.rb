@@ -6,12 +6,8 @@ class CustomersController < ApplicationController
     if current_user.luna?
       respond_to do |format|
         format.html do
-          @customers = if params[:id]
-                         Customer.where("id = ?", params[:id])
-                       else
-                         Customer.all
-                       end
-          @customers = @customers.order("LOWER(#{sort_column}) #{sort_direction}, id DESC").page(params[:page]).per_page(Constants::PER_PAGE)
+          @customers = Customer.order("LOWER(#{sort_column}) #{sort_direction}, id DESC") \
+                               .page(params[:page]).per_page(Constants::PER_PAGE)
         end
         format.json do
           render json: Customer.all_as_json
@@ -63,6 +59,6 @@ class CustomersController < ApplicationController
   end
 
   def sort_column
-    super('last_name')
+    super('name')
   end
 end
