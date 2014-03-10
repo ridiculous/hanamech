@@ -83,7 +83,7 @@
     <tr>
       <td colspan="2" class="num">Total Parts</td>
       <td>
-        <%= f.text_field(:parts_total, value: '%.2f' % @workorder.parts_total.to_f, name: 'total_parts', id: 'total_parts', class: 'num', disabled: true, style: 'height: 19px;') %>
+        <%= f.text_field(:parts_total, value: '%.2f' % @workorder.parts_total.to_f, name: 'total_parts', id: 'total_parts', class: 'num', style: 'height: 19px;') %>
       </td>
     </tr>
   </table>

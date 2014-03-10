@@ -10,6 +10,9 @@ var utils = {
 
 $(function () {
 
+    var $PART_TOTALS = $('#total_parts, #workorder_parts_total');
+
+    partsTotal();
     partsCalculator();
     laborCalculator();
     totalCalculator();
@@ -146,25 +149,31 @@ $(function () {
 
     }
 
+    function partsTotal() {
+        $PART_TOTALS.on('keyup', function () {
+            $PART_TOTALS.not('#' + this.id).val(this.value);
+        });
+    }
+
     function partsCalculator() {
-        var $ph = $('#total_parts, #workorder_parts_total')
-            , $table = $('.parts-section').find('.ctable');
+        var $table = $('.parts-section').find('.ctable');
 
         $table.find('.part-price, .part-quantity')
             .on('keyup', function () {
-                $ph.val(sumUp($table.find('tr').toArray()).toFixed(2)).trigger('change')
+                $PART_TOTALS.val(sumUpRows($table.find('tr').toArray()).toFixed(2)).trigger('change')
             });
 
-        function sumUp(rows) {
-            for (var i = 0, val = 0.0; i < rows.length; i++) {
-                var quantity = $('.part-quantity', rows[i]).val()
-                    , unit_price = $('.part-price', rows[i]).val();
-                if (unit_price && quantity && !isNaN(quantity) && utils.isNumeric(unit_price)) {
-                    val += parseFloat(utils.pureAmount(quantity)) * parseFloat(utils.pureAmount(unit_price));
-                }
+    }
+
+    function sumUpRows(rows) {
+        for (var i = 0, val = 0.0; i < rows.length; i++) {
+            var quantity = $('.part-quantity', rows[i]).val()
+                , unit_price = $('.part-price', rows[i]).val();
+            if (unit_price && quantity && !isNaN(quantity) && utils.isNumeric(unit_price)) {
+                val += parseFloat(utils.pureAmount(quantity)) * parseFloat(utils.pureAmount(unit_price));
             }
-            return val;
         }
+        return val;
     }
 
     function laborCalculator() {
