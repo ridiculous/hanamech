@@ -37,7 +37,8 @@ a:visited {
   color: #005AB3;
 }
 
-a:hover {
+a:hover,
+a.hover {
   color: #FFF;
   background-color: #005AB3
 }

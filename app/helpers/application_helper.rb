@@ -16,7 +16,7 @@ module ApplicationHelper
       flash_body = request.flash.discard.collect { |k, msg| msg }
       flash_prefix = if flash_body.first.is_a?(Array)
                        flash_body.first.shift
-                     elsif flash_type == :notice
+                     elsif flash_type.to_sym == :notice
                        'Success!'
                      else
                        'Oops!'

@@ -1,0 +1,25 @@
+<div class="pb10">
+	<% if can?(:update, @customer) %>
+		<% if action_name == 'edit' %>
+			<%= link_to('Edit', customer_path(@customer), class: 'hover') %>
+		<% else %>
+			<%= link_to('Edit', edit_customer_path(@customer)) %>
+		<% end %>
+	<% end %>
+	<% if @customer.user %>
+		<% if can?(:destroy, User) %>
+			<%=
+					link_to('Delete User Account', user_path(@customer.user),
+						data: { confirm: "Are you sure you want to delete their user account?" }, method: :delete, class: 'delete')
+			%>
+		<% end %>
+	<% else %>
+		<%= link_to 'Make User', new_customer_user_path(@customer) if can?(:create, User) %>
+	<% end %>
+	<% if can?(:destroy, @customer) %>
+		<%=
+				link_to 'Delete', customer_path(@customer),
+					data: { confirm: "Are you sure you want to delete #{@customer.first_name}?" }, method: :delete, class: 'delete'
+		%>
+	<% end %>
+</div>

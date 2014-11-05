@@ -22,7 +22,7 @@
         <div class="customer-menu">
 
           <%= content_tag(:span, class: 'customer-actions') do %>
-              <%= tab_link_to(@customer.name, customer_path(@customer), controller_name == 'customers') %>
+              <%= tab_link_to(@customer.name.presence || @customer.changes['name'].to_a.first, customer_path(@customer), controller_name == 'customers') %>
               <%= tab_link_to('Cars', customer_cars_path(@customer), request.path =~ /(cars|cars\/new)\z/) %>
               <% @customer.cars.reject(&:new_record?).slice(0, 5).each do |car| %>
                   <%= tab_link_to(car.name, customer_car_path(@customer, car), request.path =~ Regexp.new("cars/#{car.id}")) %>

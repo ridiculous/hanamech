@@ -8,7 +8,7 @@ class Customer < ActiveRecord::Base
   validates :name, presence: true
 
   def full_name
-    "#{last_name}, #{first_name}"
+    "#{first_name} #{last_name}"
   end
 
   def to_s

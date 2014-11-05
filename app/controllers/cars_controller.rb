@@ -80,5 +80,7 @@ class CarsController < ApplicationController
              end
            end
     @customer ||= @car.customer
+  rescue ActiveRecord::RecordNotFound
+    redirect_to(my_cars_path)
   end
 end
