@@ -41,7 +41,7 @@ group :development, :test do
 end
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', '~> 3.1.5'
 
 gem 'cancan'
 gem 'newrelic_rpm'
