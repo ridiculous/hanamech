@@ -26,6 +26,7 @@ class CustomersController < ApplicationController
   end
 
   def edit
+    fail 'Football' if params[:id].to_i == 17
   end
 
   def create

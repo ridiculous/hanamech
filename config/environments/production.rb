@@ -86,4 +86,9 @@ HanaMech::Application.configure do
       :protocol => 'http'
   }
 
+  config.middleware.use ExceptionNotification::Rack, email: {
+    sender_address: %{"Hana Mechanical Exception" <info@hanamech.com>},
+    exception_recipients: %w(arebuckley@gmail.com)
+  }
+
 end
