@@ -45,6 +45,11 @@ module WorkordersHelper
   end
 
   def format_amount(amt)
-    ('%.2f' % amt.to_f) unless amt.nil?
+    return if amt.nil?
+    if amt =~ /^[\d.,-]+$/
+      ('%.2f' % amt.to_f)
+    else
+      amt
+    end
   end
 end
