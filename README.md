@@ -1,5 +1,5 @@
 Hana Mechanical Web App
 ========
 
-![image](https://i.imgur.com/6zBGAAb.png)
+![image](http://i.imgur.com/VEUioI1.png)
 
