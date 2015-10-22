@@ -1,8 +1,5 @@
-Cuz you know what it do what it does
+Hana Mechanical Web App
 ========
 
-Date chores needed to upgrade to V2
-============
-
-     rake upgrade
+![image](https://i.imgur.com/6zBGAAb.png)
 
