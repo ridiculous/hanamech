@@ -584,3 +584,14 @@ input[type=submit] {
     outline-offset: -2px;
   }
 }
+
+.hidden-input-copy {
+  display: inline;
+  opacity: 0;
+  padding: 0 6px;
+  margin: 0;
+  position: absolute;
+  font-size: 12px;
+  // font-family: BlinkMacSystemFont;
+  // font is set dynamically based on the input font
+}
