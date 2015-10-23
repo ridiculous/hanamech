@@ -17,8 +17,8 @@
           <tr>
             <td><%= link_to workorder.date, edit_my_wo_path(workorder) %></td>
             <td><%= workorder.customer.try(:name) || '[None]' %></td>
-            <td><%= workorder.jobs.map(&:name).join(', ') %></td>
-            <td><%= "$#{workorder.total.to_f}" %></td>
+            <td><%= workorder.jobs.pluck(:name).reject(&:blank?).join(', ') %></td>
+            <td><%= format_amount(workorder.total, '$') %></td>
             <td><%= link_to((current_user.luna? ? 'Edit' : 'View'), edit_my_wo_path(workorder)) %></td>
             <td><%= link_to 'PDF', workorder_path(workorder, format: :pdf) %></td>
             <td>

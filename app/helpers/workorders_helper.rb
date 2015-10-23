@@ -44,10 +44,11 @@ module WorkordersHelper
     end
   end
 
-  def format_amount(amt)
-    return if amt.nil?
-    if amt =~ /^[\d.,-]+$/
-      '%.2f' % Float(amt.tr(',', ''))
+  def format_amount(amt, prefix = '')
+    return if amt.blank?
+    amt = amt.to_s
+    if amt =~ /^[\d.,\s-]+$/
+      "#{prefix}%.2f" % Float(amt.tr(',', ''))
     else
       amt
     end

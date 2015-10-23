@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021234428) do
+ActiveRecord::Schema.define(version: 20151023212832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,12 +70,13 @@ ActiveRecord::Schema.define(version: 20151021234428) do
   end
 
   create_table "workorder_jobs", force: true do |t|
-    t.integer  "workorder_id", null: false
-    t.integer  "job_id",       null: false
+    t.integer  "workorder_id",             null: false
+    t.integer  "job_id",                   null: false
     t.string   "total"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "hours"
+    t.integer  "form_index",   default: 0
   end
 
   create_table "workorder_parts", force: true do |t|

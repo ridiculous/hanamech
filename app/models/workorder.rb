@@ -45,8 +45,10 @@ class Workorder < ActiveRecord::Base
   end
 
   def build_jobs
-    (JOBS - workorder_jobs.length).times.each do
-      workorder_jobs.build.build_job
+    default = (0...JOBS).to_a
+    existing = workorder_jobs.pluck(:form_index)
+    (default - existing).each do |i|
+      workorder_jobs.build(form_index: i).build_job
     end
   end
 
@@ -54,7 +56,8 @@ class Workorder < ActiveRecord::Base
   def incomplete_item?(obj)
     suspect = obj.each_value.detect { |x| x.respond_to?(:values) && x[:name].blank? }
     if suspect && obj.has_key?(:id)
-      !(obj[:_destroy] = true) # false
+      obj[:_destroy] = true
+      false
     else
       suspect
     end
