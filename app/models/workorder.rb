@@ -46,7 +46,7 @@ class Workorder < ActiveRecord::Base
 
   def build_jobs
     default = (0...JOBS).to_a
-    existing = workorder_jobs.pluck(:form_index)
+    existing = workorder_jobs.m(:form_index)
     (default - existing).each do |i|
       workorder_jobs.build(form_index: i).build_job
     end

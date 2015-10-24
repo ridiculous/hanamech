@@ -125,11 +125,10 @@
       <th width="69%">Job Description</th>
       <th width="15%">Total</th>
     </tr>
-    <% form_index = -1 %>
     <%= f.fields_for(:workorder_jobs, f.object.workorder_jobs.sort_by(&:form_index)) do |woj| %>
         <tr>
           <td>
-            <%= woj.hidden_field(:form_index, value: form_index += 1) %>
+            <%= woj.hidden_field(:form_index) %>
             <%= woj.text_field(:hours, class: 'num hours-total') %>
           </td>
           <td><%= woj.fields_for(:job) { |jf| jf.text_field(:name, class: 'job-name') } %></td>
