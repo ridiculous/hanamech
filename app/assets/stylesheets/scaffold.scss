@@ -1,15 +1,17 @@
 body {
-//  background-image: image-url('carbon_fibre.png');
-//  background-repeat: repeat;
   background-color: #353535;
   color: #333;
 }
 
 body, p, ol, ul, td {
-  font-family: "Helvetica Neue", arial, helvetica, sans-serif;
+  font-family: Tahoma, Geneva, sans-serif;
   font-size: 15px;
   line-height: 18px;
   text-align: left;
+}
+
+input[type=text] {
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 p {
@@ -81,7 +83,7 @@ header {
 }
 
 .header {
-  font-family: Arial, sans-serif;
+  font-family: Tahoma, Geneva, sans-serif;
   font-size: 48px;
   color: #E3C700;
   position: relative;
@@ -429,7 +431,7 @@ table tr td .sub-cell,
 
 .ctable tr td input[type=text] {
   height: 17px;
-  font-family: Helvetica, Arial, Sans-Serif;
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 .btable tr td input[type=text] {
@@ -482,7 +484,7 @@ div .table-input:focus,
 }
 
 .wo-title {
-  font-family: 'Times New Roman', "Josefin Sans", monospace;
+  font-family: Tahoma, Geneva, sans-serif;
   font-size: 30px;
   margin-top: 5px;
   padding-bottom: 10px;
@@ -594,6 +596,4 @@ input[type=submit] {
   margin: 0;
   position: absolute;
   font-size: 12px;
-  // font-family: BlinkMacSystemFont;
-  // font is set dynamically based on the input font
 }
