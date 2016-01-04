@@ -39,8 +39,6 @@ module ApplicationHelper
       unless in_customer_mode
         concat tab_link_to('Cars', cars_path, at?('cars'))
         concat tab_link_to('Work Orders', workorders_path, at?('workorders'))
-        concat tab_link_to('Jobs', jobs_path, at?('jobs'))
-        concat tab_link_to('Parts', parts_path, at?('parts'))
       end
       concat tab_link_to('Admin', users_path, at?('users'))
       concat link_to('Log out', logout_path, style: 'margin-right:0')

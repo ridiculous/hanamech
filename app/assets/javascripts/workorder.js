@@ -16,8 +16,8 @@ $(function () {
   partsCalculator();
   laborCalculator();
   totalCalculator();
-  partsAutocomplete();
-  jobsAutocomplete();
+//  partsAutocomplete();
+//  jobsAutocomplete();
   carsAutocomplete();
 
   $('.customer-name').one('click', function () {
@@ -190,15 +190,13 @@ $(function () {
       .on('keyup', function () {
         $PART_TOTALS.val(sumUpRows($table.find('tr').toArray()).toFixed(2)).trigger('change')
       });
-
   }
 
   function sumUpRows(rows) {
     for (var i = 0, val = 0.0; i < rows.length; i++) {
-      var quantity = $('.part-quantity', rows[i]).val()
-        , unit_price = $('.part-price', rows[i]).val();
-      if (unit_price && quantity && !isNaN(quantity) && utils.isNumeric(unit_price)) {
-        val += parseFloat(utils.pureAmount(quantity)) * parseFloat(utils.pureAmount(unit_price));
+      var unit_price = $('.part-price', rows[i]).val();
+      if (unit_price && utils.isNumeric(unit_price)) {
+        val += parseFloat(utils.pureAmount(unit_price));
       }
     }
     return val;
